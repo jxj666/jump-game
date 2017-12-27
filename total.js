@@ -1,7 +1,7 @@
 var canvas = document.getElementById('canvas'),
     ctx = canvas.getContext('2d');
-var width = 422,
-    height = 552;
+var width = 250,
+    height = 400;
 canvas.width = width;
 canvas.height = height;
 
@@ -9,7 +9,7 @@ canvas.height = height;
 
 var platforms = [],
     image = document.getElementById("sprite"),
-    player, platformCount = 10,
+    player, platformCount = 5,
     position = 0,
     
     gravity = 0.2,
@@ -95,9 +95,9 @@ var Player = function() {
         this.vy = -8;
     };
 
-    this.jumpHigh = function() {
-        this.vy = -16;
-    };
+    
+    
+    
 
 };
 player = new Player();
@@ -130,10 +130,10 @@ function Platform() {
 
             if (this.type == 1) this.cy = 0;
             else if (this.type == 2) this.cy = 61;
-            else if (this.type == 3 && this.flag === 0) this.cy = 31;
-            else if (this.type == 3 && this.flag == 1) this.cy = 1000;
-            else if (this.type == 4 && this.state === 0) this.cy = 90;
-            else if (this.type == 4 && this.state == 1) this.cy = 1000;
+            
+            
+            
+            
 
             ctx.drawImage(image, this.cx, this.cy, this.cwidth, this.cheight, this.x, this.y, this.width, this.height);
         } catch (e) {}
@@ -157,12 +157,12 @@ function Platform() {
 
     
     
-    if (this.type == 3 && broken < 1) {
-        broken++;
-    } else if (this.type == 3 && broken >= 1) {
-        this.type = 1;
-        broken = 0;
-    }
+    
+    
+    
+    
+    
+    
 
     this.moved = 0;
     this.vx = 1;
@@ -173,58 +173,58 @@ for (var i = 0; i < platformCount; i++) {
 
 
 
-var Platform_broken_substitute = function() {
-    this.height = 30;
-    this.width = 70;
-
-    this.x = 0;
-    this.y = 0;
-
-    
-    this.cx = 0;
-    this.cy = 554;
-    this.cwidth = 105;
-    this.cheight = 60;
-
-    this.appearance = false;
-
-    this.draw = function() {
-        try {
-            if (this.appearance === true) ctx.drawImage(image, this.cx, this.cy, this.cwidth, this.cheight, this.x, this.y, this.width, this.height);
-            else return;
-        } catch (e) {}
-    };
-};
-var platform_broken_substitute = new Platform_broken_substitute();
 
 
 
-var spring = function() {
-    this.x = 0;
-    this.y = 0;
 
-    this.width = 26;
-    this.height = 30;
 
-    
-    
-    this.cx = 0;
-    this.cy = 0;
-    this.cwidth = 45;
-    this.cheight = 53;
 
-    this.state = 0;
 
-    this.draw = function() {
-        try {
-            if (this.state === 0) this.cy = 445;
-            else if (this.state == 1) this.cy = 501;
 
-            ctx.drawImage(image, this.cx, this.cy, this.cwidth, this.cheight, this.x, this.y, this.width, this.height);
-        } catch (e) {}
-    };
-};
-var Spring = new spring();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -371,28 +371,28 @@ function init() {
     
     
 
-    function springCalc() {
-        var s = Spring;
-        var p = platforms[0];
+    
+    
+    
 
-        if (p.type == 1 || p.type == 2) {
-            s.x = p.x + p.width / 2 - s.width / 2;
-            s.y = p.y - p.height - 10;
+    
+    
+    
 
-            if (s.y > height / 1.1) s.state = 0;
+    
 
-            s.draw();
-        } else {
-            s.x = 0 - s.width;
-            s.y = 0 - s.height;
-        }
-    }
+    
+    
+    
+    
+    
+    
 
     
     
 
     function platformCalc() {
-        var subs = platform_broken_substitute;
+        
 
         platforms.forEach(function(p, i) {
             if (p.type == 2) {
@@ -401,23 +401,23 @@ function init() {
                 p.x += p.vx;
             }
 
-            if (p.flag == 1 && subs.appearance === false && jumpCount === 0) {
-                subs.x = p.x;
-                subs.y = p.y;
-                subs.appearance = true;
+            
+            
+            
+            
 
-                jumpCount++;
-            }
+            
+            
 
             p.draw();
         });
 
-        if (subs.appearance === true) {
-            subs.draw();
-            subs.y += 8;
-        }
+        
+        
+        
+        
 
-        if (subs.y > height) subs.appearance = false;
+        
     }
 
     function collides() {
@@ -425,26 +425,26 @@ function init() {
         platforms.forEach(function(p, i) {
             if (player.vy > 0 && p.state === 0 && (player.x + 15 < p.x + p.width) && (player.x + player.width - 15 > p.x) && (player.y + player.height > p.y) && (player.y + player.height < p.y + p.height)) {
 
-                if (p.type == 3 && p.flag === 0) {
-                    p.flag = 1;
-                    jumpCount = 0;
-                    return;
-                } else if (p.type == 4 && p.state === 0) {
+                
+                
+                
+                
+                
+                
+                
+                
+                
                     player.jump();
-                    p.state = 1;
-                } else if (p.flag == 1) return;
-                else {
-                    player.jump();
-                }
+                
             }
         });
 
         
-        var s = Spring;
-        if (player.vy > 0 && (s.state === 0) && (player.x + 15 < s.x + s.width) && (player.x + player.width - 15 > s.x) && (player.y + player.height > s.y) && (player.y + player.height < s.y + s.height)) {
-            s.state = 1;
-            player.jumpHigh();
-        }
+        
+        
+        
+        
+        
 
     }
 
@@ -477,7 +477,7 @@ function init() {
         paintCanvas();
         platformCalc();
 
-        springCalc();
+        
 
         playerCalc();
         player.draw();
@@ -548,8 +548,8 @@ function reset() {
 
     base = new Base();
     player = new Player();
-    Spring = new spring();
-    platform_broken_substitute = new Platform_broken_substitute();
+    
+    
 
     platforms = [];
     for (var i = 0; i < platformCount; i++) {
