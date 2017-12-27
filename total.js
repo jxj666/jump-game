@@ -276,8 +276,8 @@ function init() {
                     dir = "right";
                     player.isMovingRight = true;
                 } else {
-                    dir = "right";
                     player.isMovingRight = false;
+                    player.isMovingLeft = false;
                 }
 
             } else {
