@@ -22,6 +22,7 @@ var platforms = [],
     image = document.getElementById("sprite"),
     player, platformCount = 10,
     position = 0,
+    // 重力
     gravity = 0.2,
     animloop,
     flag = 0,
@@ -149,11 +150,11 @@ function Platform() {
     //4: Vanishable 
     //Setting the probability of which type of platforms should be shown at what score
     //平台类型// 1：正常// 2：移动// 3：易碎（Go through）// 4：可变化//设置哪种类型的平台以什么得分显示的概率
-    if (score >= 5000) this.types = [1, 1, 1, 1, 1, 1, 1, 1];
-    else if (score >= 2000 && score < 5000) this.types = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1];
-    else if (score >= 1000 && score < 2000) this.types = [1, 1, 1, 1, 1, 1, 1, 1];
-    else if (score >= 500 && score < 1000) this.types = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1];
-    else if (score >= 100 && score < 500) this.types = [1, 1, 1, 1, 1, 1];
+    if (score >= 5000) this.types = [2, 2, 2, 2, 2];
+    else if (score >= 2000 && score < 5000) this.types = [1, 2, 2, 2, 2];
+    else if (score >= 1000 && score < 2000) this.types = [1, 1, 2, 2, 2];
+    else if (score >= 500 && score < 1000) this.types = [1, 1, 1, 2, 2];
+    else if (score >= 100 && score < 500) this.types = [1, 1, 1, 1, 2];
     else this.types = [1];
 
     this.type = this.types[Math.floor(Math.random() * this.types.length)];
@@ -470,12 +471,6 @@ function init() {
             showGoMenu();
             hideScore();
             player.isDead = "lol";
-
-            var tweet = document.getElementById("tweetBtn");
-            tweet.href = 'http://twitter.com/share?url=http://is.gd/PnFFzu&text=I just scored ' + score + ' points in the HTML5 Doodle Jump game!&count=horiztonal&via=cssdeck&related=solitarydesigns';
-
-            var facebook = document.getElementById("fbBtn");
-            facebook.href = 'http://facebook.com/sharer.php?s=100&p[url]=http://cssdeck.com/labs/html5-doodle-jump/8&p[title]=I just scored ' + score + ' points in the HTML5 Doodle Jump game!&p[summary]=Can you beat me in this awesome recreation of Doodle Jump created in HTML5?';
 
         }
     }
