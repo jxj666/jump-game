@@ -269,12 +269,12 @@ function init() {
             if (alpha != null || beta != null || gamma != null) {
 
                 var gamma_html = "";
-                if (gamma > 5) {
+                if (gamma > 30) {
                     dir = "left";
                     player.isMovingLeft = true;
-                } else if (gamma < -5) {
+                } else if (gamma < -30) {
                     dir = "right";
-                    player.isMovingRight = false;
+                    player.isMovingRight = true;
                 } else {
                     dir = "right";
                     player.isMovingRight = false;
