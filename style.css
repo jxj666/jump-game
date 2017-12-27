@@ -1,4 +1,4 @@
-@import url(http://fonts.googleapis.com/css?family=Gloria+Hallelujah);
+@import url(//fonts.googleapis.com/css?family=Gloria+Hallelujah);
 
 *{box-sizing: border-box;}
 
@@ -70,7 +70,7 @@ h3 a {color: #5a5816}
 .button {
   width: 105px;
   height: 31px;
-  background: url(http://i.imgur.com/2WEhF.png) 0 0 no-repeat;
+  background: url(//i.imgur.com/2WEhF.png) 0 0 no-repeat;
   display: block;
   color:  #000;
   font-size: 12px;
@@ -90,7 +90,7 @@ h3 a {color: #5a5816}
 .info .key {
   width: 16px;
   height: 16px;
-  background: url(http://i.imgur.com/2WEhF.png) no-repeat;
+  background: url(//i.imgur.com/2WEhF.png) no-repeat;
   text-indent: -9999px;
   display: inline-block;
 }
