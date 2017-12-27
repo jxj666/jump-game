@@ -1,18 +1,7 @@
-// RequestAnimFrame: a browser API for getting smooth animations
-// RequestAnimFrame：用于获得流畅动画的浏览器API
-window.requestAnimFrame = (function() {
-    return window.requestAnimationFrame || window.webkitRequestAnimationFrame || window.mozRequestAnimationFrame || window.oRequestAnimationFrame || window.msRequestAnimationFrame ||
-        function(callback) {
-            window.setTimeout(callback, 1000 / 60);
-        };
-})();
-
 var canvas = document.getElementById('canvas'),
     ctx = canvas.getContext('2d');
-
 var width = 422,
     height = 552;
-
 canvas.width = width;
 canvas.height = height;
 
@@ -30,8 +19,18 @@ var platforms = [],
     dir, score = 0,
     firstRun = true;
 
+
+// RequestAnimFrame: a browser API for getting smooth animations
+// RequestAnimFrame：用于获得流畅动画的浏览器API
+window.requestAnimFrame = (function() {
+    return window.requestAnimationFrame || window.webkitRequestAnimationFrame || window.mozRequestAnimationFrame || window.oRequestAnimationFrame || window.msRequestAnimationFrame ||
+        function(callback) {
+            window.setTimeout(callback, 1000 / 60);
+        };
+})();
+
 //Base object
-//基础对象
+//地板对象
 var Base = function() {
     this.height = 5;
     this.width = width;
@@ -54,7 +53,6 @@ var Base = function() {
         } catch (e) {}
     };
 };
-
 var base = new Base();
 
 //Player object
@@ -102,12 +100,10 @@ var Player = function() {
     };
 
 };
-
 player = new Player();
 
 //Platform class
 //平台类
-
 function Platform() {
     this.width = 70;
     this.height = 17;
@@ -171,7 +167,6 @@ function Platform() {
     this.moved = 0;
     this.vx = 1;
 }
-
 for (var i = 0; i < platformCount; i++) {
     platforms.push(new Platform());
 }
@@ -200,7 +195,6 @@ var Platform_broken_substitute = function() {
         } catch (e) {}
     };
 };
-
 var platform_broken_substitute = new Platform_broken_substitute();
 
 //Spring Class
@@ -230,9 +224,10 @@ var spring = function() {
         } catch (e) {}
     };
 };
-
 var Spring = new spring();
 
+
+//初始化
 function init() {
     //Variables for the game
     //游戏的变量
@@ -499,11 +494,49 @@ function init() {
     };
 
     animloop();
-
     hideMenu();
     showScore();
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//重置
 function reset() {
     hideGoMenu();
     showScore();
@@ -539,7 +572,7 @@ function showGoMenu() {
     menu.style.visibility = "visible";
 
     var scoreText = document.getElementById("go_score");
-    scoreText.innerHTML = "You scored " + score + " points!";
+    scoreText.innerHTML = "你的得分" + score ;
 }
 
 //Hides the game over menu
@@ -564,6 +597,7 @@ function hideScore() {
     menu.style.zIndex = -1;
 }
 
+//动作控制
 function playerJump() {
     player.y += player.vy;
     player.vy += gravity;
@@ -646,7 +680,6 @@ function playerJump() {
 
     player.draw();
 }
-
 function update() {
     ctx.clearRect(0, 0, width, height);
     playerJump();
