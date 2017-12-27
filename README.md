@@ -1,12 +1,1 @@
-HTML5 Doodle Jump
-=================
-
-This is a recreation of Doodle Jump that originally comes for Android and iOS devices. This game is created using awesome HTML5 API and Canvas. It does not have all of the features that the original game has (for now) like Monsters, Power ups etc.
-
-I'll be releasing a second version of this game with more features from the original game along with sounds to make this game more fun. Stay tuned for more game releases by me :D
-
-**Note**: This game is just a "recreation" of the original game in HTML5 and the graphics are made in Photoshop. I respect the original creators [Igor Pusenjak](http://www.limasky.com/) and his brother for their great work. I am a big fan of this game and I really love it so I decided to recreate that in HTML5 and trying to incorporate the same fun level the original creators did. 
-
-The name of the game and images are &copy; **copyrights** by the respective creators and [Lima Sky](http://www.limasky.com/). If you like this game and want to purchase it for your phone, then you can get it for you iPhone [here](http://itunes.apple.com/in/app/doodle-jump/id307727765?mt=8) or your Android phone [here](https://play.google.com/store/apps/details?id=com.realarcade.DOJ&hl=en).
-
-**Update**: You want to learn the process I used to create this game? Check out [this post by me](http://codetheory.in/how-i-created-my-version-of-doodle-jump-in-html5/). :)
+HTML5涂鸦跳跃 这是最初为Android和iOS设备提供的Doodle Jump的娱乐活动。这个游戏是使用真棒HTML5 API和画布创建的。它没有所有的原始游戏（现在）像怪物，功率ups等功能 我将发布第二个版本的游戏与原始游戏的更多功能以及声音，使这个游戏更有趣。请继续关注我的更多游戏发行：D 注意：这个游戏只是HTML5原始游戏的“娱乐”，图形是在Photoshop中制作的。我尊重原创者Igor Pusenjak和他的兄弟的伟大工作。我是这个游戏的忠实粉丝，我真的很喜欢它，所以我决定在HTML5中重新创建这个游戏，并试图将原创者所做的相同乐趣级别合并。 游戏和图像的名称由各自的创作者和利马天空版权所有。如果你喜欢这个游戏，并希望为你的手机购买它，那么你可以在这里为你的iPhone或你的Android手机在这里得到它。 更新：你想学习我用来创建这个游戏的过程？看看我的这篇文章。 :)
