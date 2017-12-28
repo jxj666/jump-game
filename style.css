@@ -59,7 +59,7 @@ img {display: none}
 h2, h3, h1 {font-weight: normal}
 h1 {
   font-size: 60px; 
-  color: #5a5816; 
+  color: #fff; 
   transform: rotate(-10deg);
   margin: 0px;
 }
