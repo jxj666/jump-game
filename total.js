@@ -674,23 +674,23 @@ function playerJump() {
     //     }
     // }
 
-    if (window.DeviceOrientationEvent) {
-        window.addEventListener("deviceorientation", function(event) {
-            var gamma = event.gamma;
-            console.log(i++);
-            console.log(gamma);
-            if (gamma < -10) {
-                dir = "left";
-                player.isMovingLeft = true;
-            } else if (gamma > 10) {
-                dir = "right";
-                player.isMovingRight = true;
-            } else {
-                player.isMovingRight = false;
-                player.isMovingLeft = false;
-            }
-        }, true);
-    }
+    // if (window.DeviceOrientationEvent) {
+    //     window.addEventListener("deviceorientation", function(event) {
+    //         var gamma = event.gamma;
+    //         console.log(i++);
+    //         console.log(gamma);
+    //         if (gamma < -10) {
+    //             dir = "left";
+    //             player.isMovingLeft = true;
+    //         } else if (gamma > 10) {
+    //             dir = "right";
+    //             player.isMovingRight = true;
+    //         } else {
+    //             player.isMovingRight = false;
+    //             player.isMovingLeft = false;
+    //         }
+    //     }, true);
+    // }
 
     //Adding keyboard controls
     //添加键盘控件
