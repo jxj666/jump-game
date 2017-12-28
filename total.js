@@ -724,4 +724,12 @@ menuLoop = function() {
     requestAnimFrame(menuLoop);
 };
 
+function resize() {
+    console.log($(window).width(), $(window).height());
+    $('.container').css('height',$(window).height());
+    $('.container').css('width',$(window).width());
+}
+resize();
+
+
 menuLoop();
