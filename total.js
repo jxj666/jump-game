@@ -675,7 +675,7 @@ function playerJump() {
 
     if (window.DeviceOrientationEvent) {
         window.addEventListener("deviceorientation", function(event) {
-            var leftToRight = event.gamma;
+            var gamma = event.gamma;
             if (gamma < -10) {
                 dir = "left";
                 player.isMovingLeft = true;
@@ -686,7 +686,7 @@ function playerJump() {
                 player.isMovingRight = false;
                 player.isMovingLeft = false;
             }
-        }, false);
+        }, true);
     }
 
     //Adding keyboard controls
