@@ -651,40 +651,43 @@ function playerJump() {
         if (player.vy < -7 && player.vy > -15) player.dir = "right_land";
     }
 
+    // if (window.DeviceOrientationEvent) {
+    //     window.addEventListener('deviceorientation', DeviceOrientationHandler, false);
+    // } else {
+    //     console.log('DeviceOrientationEvent不支持!');
+    // }
+
+
+    // function DeviceOrientationHandler(event) {
+    //     var alpha = event.alpha,
+    //         beta = event.beta,
+    //         gamma = event.gamma;
+
+    //     if (alpha != null || beta != null || gamma != null) {
+
+    //         var gamma_html = "";
+
+
+    //     } else {
+    //         console.log('设备不支持!');
+    //     }
+    // }
+
     if (window.DeviceOrientationEvent) {
-
-        document.onDeviceOrientationHandler = function(event) {
-            var alpha = event.alpha,
-                beta = event.beta,
-                gamma = event.gamma;
-
-            if (alpha != null || beta != null || gamma != null) {
-
-                var gamma_html = "";
-                if (gamma < -5) {
-                    dir = "left";
-                    player.isMovingLeft = true;
-                } else if (gamma > 5) {
-                    dir = "right";
-                    player.isMovingRight = true;
-                } else {
-                    player.isMovingRight = false;
-                    player.isMovingLeft = false;
-                }
-
+        window.addEventListener("deviceorientation", function(event) {
+            var leftToRight = event.gamma;
+            if (gamma < -10) {
+                dir = "left";
+                player.isMovingLeft = true;
+            } else if (gamma > 10) {
+                dir = "right";
+                player.isMovingRight = true;
             } else {
-                console.log('设备不支持!');
+                player.isMovingRight = false;
+                player.isMovingLeft = false;
             }
-        }
-
-
-    } else {
-        console.log('DeviceOrientationEvent不支持!');
+        }, false);
     }
-
-
-
-
 
     //Adding keyboard controls
     //添加键盘控件
