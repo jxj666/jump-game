@@ -677,7 +677,8 @@ function playerJump() {
     if (window.DeviceOrientationEvent) {
         window.addEventListener("deviceorientation", function(event) {
             var gamma = event.gamma;
-            console.log(number.toString(i++)+gamma);
+            console.log(i++);
+            console.log(gamma);
             if (gamma < -10) {
                 dir = "left";
                 player.isMovingLeft = true;
