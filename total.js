@@ -652,35 +652,38 @@ function playerJump() {
     }
 
     if (window.DeviceOrientationEvent) {
-        window.addEventListener('deviceorientation', DeviceOrientationHandler, false);
+
+        doucument.onDeviceOrientationHandler = function(event) {
+            var alpha = event.alpha,
+                beta = event.beta,
+                gamma = event.gamma;
+
+            if (alpha != null || beta != null || gamma != null) {
+
+                var gamma_html = "";
+                if (gamma < -10) {
+                    dir = "left";
+                    player.isMovingLeft = true;
+                } else if (gamma > 10) {
+                    dir = "right";
+                    player.isMovingRight = true;
+                } else {
+                    player.isMovingRight = false;
+                    player.isMovingLeft = false;
+                }
+
+            } else {
+                console.log('设备不支持!');
+            }
+        }
+
+
     } else {
         console.log('DeviceOrientationEvent不支持!');
     }
 
 
-    function DeviceOrientationHandler(event) {
-        var alpha = event.alpha,
-            beta = event.beta,
-            gamma = event.gamma;
 
-        if (alpha != null || beta != null || gamma != null) {
-
-            var gamma_html = "";
-            if (gamma < -10) {
-                dir = "left";
-                player.isMovingLeft = true;
-            } else if (gamma > 10) {
-                dir = "right";
-                player.isMovingRight = true;
-            } else {
-                player.isMovingRight = false;
-                player.isMovingLeft = false;
-            }
-
-        } else {
-            console.log('设备不支持!');
-        }
-    }
 
 
     //Adding keyboard controls
