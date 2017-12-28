@@ -688,7 +688,7 @@ function playerJump() {
     //当用户按住键时产生加速度
     if (player.isMovingLeft === true) {
         player.x += player.vx;
-        player.vx -= 0.15;
+        player.vx -= 0.05;
     } else {
         player.x += player.vx;
         if (player.vx < 0) player.vx += 0.1;
@@ -696,7 +696,7 @@ function playerJump() {
 
     if (player.isMovingRight === true) {
         player.x += player.vx;
-        player.vx += 0.15;
+        player.vx += 0.05;
     } else {
         player.x += player.vx;
         if (player.vx > 0) player.vx -= 0.1;
