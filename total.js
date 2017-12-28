@@ -254,72 +254,73 @@ function init() {
             player.dir = "right";
             if (player.vy < -7 && player.vy > -15) player.dir = "right_land";
         }
-        if (window.DeviceOrientationEvent) {
-            window.addEventListener('deviceorientation', DeviceOrientationHandler, false);
-        } else {
-            console.log('DeviceOrientationEvent不支持!');
-        }
+
+        // if (window.DeviceOrientationEvent) {
+        //     window.addEventListener('deviceorientation', DeviceOrientationHandler, false);
+        // } else {
+        //     console.log('DeviceOrientationEvent不支持!');
+        // }
 
 
-        function DeviceOrientationHandler(event) {
-            var alpha = event.alpha,
-                beta = event.beta,
-                gamma = event.gamma;
+        // function DeviceOrientationHandler(event) {
+        //     var alpha = event.alpha,
+        //         beta = event.beta,
+        //         gamma = event.gamma;
 
-            if (alpha != null || beta != null || gamma != null) {
+        //     if (alpha != null || beta != null || gamma != null) {
 
-                var gamma_html = "";
-                if (gamma < -10) {
-                    dir = "left";
-                    player.isMovingLeft = true;
-                } else if (gamma > 10) {
-                    dir = "right";
-                    player.isMovingRight = true;
-                } else {
-                    player.isMovingRight = false;
-                    player.isMovingLeft = false;
-                }
+        //         var gamma_html = "";
+        //         if (gamma < -10) {
+        //             dir = "left";
+        //             player.isMovingLeft = true;
+        //         } else if (gamma > 10) {
+        //             dir = "right";
+        //             player.isMovingRight = true;
+        //         } else {
+        //             player.isMovingRight = false;
+        //             player.isMovingLeft = false;
+        //         }
 
-            } else {
-                console.log('设备不支持!');
-            }
-        }
-
-
+        //     } else {
+        //         console.log('设备不支持!');
+        //     }
+        // }
 
 
-        //Adding keyboard controls
-        //添加键盘控件
-        document.onkeydown = function(e) {
-            var key = e.keyCode;
 
-            if (key == 37) {
-                dir = "left";
-                player.isMovingLeft = true;
-            } else if (key == 39) {
-                dir = "right";
-                player.isMovingRight = true;
-            }
 
-            if (key == 32) {
-                if (firstRun === true)
-                    init();
-                else
-                    reset();
-            }
-        };
+        // //Adding keyboard controls
+        // //添加键盘控件
+        // document.onkeydown = function(e) {
+        //     var key = e.keyCode;
 
-        document.onkeyup = function(e) {
-            var key = e.keyCode;
+        //     if (key == 37) {
+        //         dir = "left";
+        //         player.isMovingLeft = true;
+        //     } else if (key == 39) {
+        //         dir = "right";
+        //         player.isMovingRight = true;
+        //     }
 
-            if (key == 37) {
-                dir = "left";
-                player.isMovingLeft = false;
-            } else if (key == 39) {
-                dir = "right";
-                player.isMovingRight = false;
-            }
-        };
+        //     if (key == 32) {
+        //         if (firstRun === true)
+        //             init();
+        //         else
+        //             reset();
+        //     }
+        // };
+
+        // document.onkeyup = function(e) {
+        //     var key = e.keyCode;
+
+        //     if (key == 37) {
+        //         dir = "left";
+        //         player.isMovingLeft = false;
+        //     } else if (key == 39) {
+        //         dir = "right";
+        //         player.isMovingRight = false;
+        //     }
+        // };
 
         //Accelerations produces when the user hold the keys
         //当用户按住键时产生加速度
@@ -650,6 +651,38 @@ function playerJump() {
         if (player.vy < -7 && player.vy > -15) player.dir = "right_land";
     }
 
+    if (window.DeviceOrientationEvent) {
+        window.addEventListener('deviceorientation', DeviceOrientationHandler, false);
+    } else {
+        console.log('DeviceOrientationEvent不支持!');
+    }
+
+
+    function DeviceOrientationHandler(event) {
+        var alpha = event.alpha,
+            beta = event.beta,
+            gamma = event.gamma;
+
+        if (alpha != null || beta != null || gamma != null) {
+
+            var gamma_html = "";
+            if (gamma < -10) {
+                dir = "left";
+                player.isMovingLeft = true;
+            } else if (gamma > 10) {
+                dir = "right";
+                player.isMovingRight = true;
+            } else {
+                player.isMovingRight = false;
+                player.isMovingLeft = false;
+            }
+
+        } else {
+            console.log('设备不支持!');
+        }
+    }
+
+
     //Adding keyboard controls
     //添加键盘控件
     document.onkeydown = function(e) {
@@ -726,8 +759,8 @@ menuLoop = function() {
 
 function resize() {
     console.log($(window).width(), $(window).height());
-    $('.container').css('height',$(window).height());
-    $('.container').css('width',$(window).width());
+    $('.container').css('height', $(window).height());
+    $('.container').css('width', $(window).width());
 }
 resize();
 
