@@ -763,12 +763,27 @@ menuLoop = function() {
     requestAnimFrame(menuLoop);
 };
 
-function resize() {
-    console.log($(window).width(), $(window).height());
+// function resize() {
+//     console.log($(window).width(), $(window).height());
+//     $('.container').css('height', $(window).height());
+//     $('.container').css('width', $(window).width());
+// }
+// resize();
+
+function get_hfs() {
     $('.container').css('height', $(window).height());
     $('.container').css('width', $(window).width());
 }
-resize();
+get_hfs();
 
+function throttle(method, context) {
+    clearTimeout(method.timer);
+    method.timer = setTimeout(function() {
+        method.call(context);
+    }, 100);
+}
+window.onresize = function() {
+    throttle(get_hfs);
+}
 
 menuLoop();
