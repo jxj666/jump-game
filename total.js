@@ -341,10 +341,10 @@ function init() {
 
         // Speed limits!
         // 速度限制！
-        if (player.vx > 8)
-            player.vx = 8;
-        else if (player.vx < -8)
-            player.vx = -8;
+        if (player.vx > 3)
+            player.vx = 3;
+        else if (player.vx < -3)
+            player.vx = -3;
 
         //console.log(player.vx);
         //Jump the player when it hits the base
