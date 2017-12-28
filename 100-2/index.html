@@ -1942,86 +1942,75 @@ s.parentNode.insertBefore(fs, s);
             params._ruleInfo = $.toJSON(_ruleInfo);
         }
         $.extend(params, option);
-        $.ajax({
-            type: 'post',
-            url: '//15715741-10.hd.webportal.cc/ajax/hdgame_h.jsp?cmd=setAchieve&aid=15715741&playerId=' + g_config.playerId,
-            data: params,
-            error: function() {
-                HdGame.hideLoadToast();
+        console.log('jxj');
+        (function() {
+            var j = { "success": true, "isSuc": false, "rt": 0, "rank": 1, "beat": 80, "playerId": 803, "score": "60", "achieveToken": "LTE1MjIxMTA1NzYw", "msg": "设置成绩成功" };
+            var data = j;
+            HdGame.hideLoadToast();
+            HdGame.tlog('gameOver', data);
+            var r = $.parseJSON(data);
+            var isShowPoup = true;
+            if (!showAjaxBar) {
                 HdGame.otherAjaxComplete();
-                $('#timeUpImg,.timeUpImg').removeClass('tada');
-                var rt = {
-                    rt: -999,
-                    msg: "ajax返回错误"
-                };
-                callBack && callBack(rt, rt);
-                HdGame.tlog('gameOverErr', $.toJSON(arguments));
-            },
-            success: function(data) {
-                HdGame.hideLoadToast();
-                HdGame.tlog('gameOver', data);
-                var r = $.parseJSON(data);
-                var isShowPoup = true;
-                if (!showAjaxBar) {
-                    HdGame.otherAjaxComplete();
-                }
-
-                if (r.rt == 0) {
-                    var arg = {
-                        isSuc: r.isSuc,
-                        gameScore: _gameScoreStr,
-                        minScore: 100,
-                        bestScore: r.score,
-                        isReg: HdGame.isReg, //是否报名
-                        gameType: gameType,
-                        rank: r.rank,
-                        beat: r.beat,
-                        count: drawTimesLimit - count < 0 ? 0 : (drawTimesLimit - count),
-                        isLimitDrawTotal: isLimitDraw,
-                        totalCount: drawTotalLimit - totalCount < 0 ? 0 : (drawTotalLimit - totalCount),
-                        isEqualDraw: false
-                    };
-                    setTimeout(function() {
-                        var callBackArg = { rt: r.rt, msg: r.msg, arg: arg, pId: r.playerId, firstScore: r.firstScore };
-                        g_config.playerId = r.playerId;
-                        if (false) {
-                            callBackArg.infoList = r.infoList;
-                        }
-                        callBack && (isShowPoup = callBack(callBackArg, r));
-                        $('#timeUpImg,.timeUpImg').removeClass('tada');
-                        isShowPoup !== false && HdGame.resulePoup.show(arg);
-                    }, 300);
-                    PlayInfo.addPlayTimes(1);
-                    g_config.achieveToken = r.achieveToken;
-                } else if (r.rt == 11) {
-                    alert("已被检测到有作弊行为，再次被检测将永久禁止参与本游戏！");
-                } else if (r.rt == 12) {
-                    alert("由于作弊行为，该微信号已永久禁止参与本游戏！");
-                } else if (r.rt == 23) {
-                    HdGame.statusMsg(3);
-                } else {
-                    callBack && (isShowPoup = callBack({ rt: r.rt, msg: r.msg }, r));
-                    isShowPoup !== false && HdGame.resulePoup.show({
-                        isSuc: false,
-                        gameScore: '--',
-                        minScore: 100,
-                        bestScore: '--',
-                        isReg: HdGame.isReg, //是否报名
-                        gameType: gameType,
-                        rank: '--',
-                        beat: '--',
-                        count: drawTimesLimit - count < 0 ? 0 : (drawTimesLimit - count),
-                        isLimitDrawTotal: isLimitDraw,
-                        totalCount: drawTotalLimit - totalCount < 0 ? 0 : (drawTotalLimit - totalCount),
-                        isEqualDraw: false
-                    });
-                    return;
-                }
-                if (r.rt !== 0) {
-                    callBack && callBack({ rt: r.rt, msg: r.msg }, r);
-                }
             }
-        });
+
+            if (r.rt == 0) {
+                var arg = {
+                    isSuc: r.isSuc,
+                    gameScore: _gameScoreStr,
+                    minScore: 100,
+                    bestScore: r.score,
+                    isReg: HdGame.isReg, //是否报名
+                    gameType: gameType,
+                    rank: r.rank,
+                    beat: r.beat,
+                    count: drawTimesLimit - count < 0 ? 0 : (drawTimesLimit - count),
+                    isLimitDrawTotal: isLimitDraw,
+                    totalCount: drawTotalLimit - totalCount < 0 ? 0 : (drawTotalLimit - totalCount),
+                    isEqualDraw: false
+                };
+                setTimeout(function() {
+                    var callBackArg = { rt: r.rt, msg: r.msg, arg: arg, pId: r.playerId, firstScore: r.firstScore };
+                    g_config.playerId = r.playerId;
+                    if (false) {
+                        callBackArg.infoList = r.infoList;
+                    }
+                    callBack && (isShowPoup = callBack(callBackArg, r));
+                    $('#timeUpImg,.timeUpImg').removeClass('tada');
+                    isShowPoup !== false && HdGame.resulePoup.show(arg);
+                }, 300);
+                PlayInfo.addPlayTimes(1);
+                g_config.achieveToken = r.achieveToken;
+            } else if (r.rt == 11) {
+                alert("已被检测到有作弊行为，再次被检测将永久禁止参与本游戏！");
+            } else if (r.rt == 12) {
+                alert("由于作弊行为，该微信号已永久禁止参与本游戏！");
+            } else if (r.rt == 23) {
+                HdGame.statusMsg(3);
+            } else {
+                callBack && (isShowPoup = callBack({ rt: r.rt, msg: r.msg }, r));
+                isShowPoup !== false && HdGame.resulePoup.show({
+                    isSuc: false,
+                    gameScore: '--',
+                    minScore: 100,
+                    bestScore: '--',
+                    isReg: HdGame.isReg, //是否报名
+                    gameType: gameType,
+                    rank: '--',
+                    beat: '--',
+                    count: drawTimesLimit - count < 0 ? 0 : (drawTimesLimit - count),
+                    isLimitDrawTotal: isLimitDraw,
+                    totalCount: drawTotalLimit - totalCount < 0 ? 0 : (drawTotalLimit - totalCount),
+                    isEqualDraw: false
+                });
+                return;
+            }
+            if (r.rt !== 0) {
+                callBack && callBack({ rt: r.rt, msg: r.msg }, r);
+            }
+
+        })()
+
         params = info = option = null;
 
         function changeTwoDecimal_f(x) {
