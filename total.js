@@ -653,7 +653,7 @@ function playerJump() {
 
     if (window.DeviceOrientationEvent) {
 
-        doucument.onDeviceOrientationHandler = function(event) {
+        document.onDeviceOrientationHandler = function(event) {
             var alpha = event.alpha,
                 beta = event.beta,
                 gamma = event.gamma;
