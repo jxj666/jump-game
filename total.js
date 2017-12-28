@@ -689,7 +689,7 @@ function playerJump() {
                 player.isMovingRight = false;
                 player.isMovingLeft = false;
             }
-        }, true);
+        }, false);
     }
 
     //Adding keyboard controls
