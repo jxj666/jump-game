@@ -309,35 +309,35 @@ function init() {
             }
         };
 
-        // document.onkeyup = function(e) {
-        //     var key = e.keyCode;
+        document.onkeyup = function(e) {
+            var key = e.keyCode;
 
-        //     if (key == 37) {
-        //         dir = "left";
-        //         player.isMovingLeft = false;
-        //     } else if (key == 39) {
-        //         dir = "right";
-        //         player.isMovingRight = false;
-        //     }
-        // };
+            if (key == 37) {
+                dir = "left";
+                player.isMovingLeft = false;
+            } else if (key == 39) {
+                dir = "right";
+                player.isMovingRight = false;
+            }
+        };
 
-        // //Accelerations produces when the user hold the keys
-        // //当用户按住键时产生加速度
-        // if (player.isMovingLeft === true) {
-        //     player.x += player.vx;
-        //     player.vx -= 0.15;
-        // } else {
-        //     player.x += player.vx;
-        //     if (player.vx < 0) player.vx += 0.1;
-        // }
+        //Accelerations produces when the user hold the keys
+        //当用户按住键时产生加速度
+        if (player.isMovingLeft === true) {
+            player.x += player.vx;
+            player.vx -= 0.15;
+        } else {
+            player.x += player.vx;
+            if (player.vx < 0) player.vx += 0.1;
+        }
 
-        // if (player.isMovingRight === true) {
-        //     player.x += player.vx;
-        //     player.vx += 0.15;
-        // } else {
-        //     player.x += player.vx;
-        //     if (player.vx > 0) player.vx -= 0.1;
-        // }
+        if (player.isMovingRight === true) {
+            player.x += player.vx;
+            player.vx += 0.15;
+        } else {
+            player.x += player.vx;
+            if (player.vx > 0) player.vx -= 0.1;
+        }
 
         // Speed limits!
         // 速度限制！
