@@ -17,7 +17,7 @@ var platforms = [],
     flag = 0,
     menuloop, broken = 0,
     dir, score = 0,
-    i=0,
+    i = 0,
     firstRun = true;
 
 
@@ -674,25 +674,26 @@ function playerJump() {
     //     }
     // }
 
-    if (window.DeviceOrientationEvent) {
-        console.log('true');
-        return;
-        window.addEventListener("deviceorientation", function(event) {
-            var gamma = event.gamma;
-            console.log(i++);
-            console.log(gamma);
-            if (gamma < -10) {
-                dir = "left";
-                player.isMovingLeft = true;
-            } else if (gamma > 10) {
-                dir = "right";
-                player.isMovingRight = true;
-            } else {
-                player.isMovingRight = false;
-                player.isMovingLeft = false;
-            }
-        }, true);
-    }
+
+}
+// if (window.DeviceOrientationEvent) {
+//     console.log('true');
+//     return;
+//     window.addEventListener("deviceorientation", function(event) {
+//         var gamma = event.gamma;
+//         console.log(i++);
+//         console.log(gamma);
+//         if (gamma < -10) {
+//             dir = "left";
+//             player.isMovingLeft = true;
+//         } else if (gamma > 10) {
+//             dir = "right";
+//             player.isMovingRight = true;
+//         } else {
+//             player.isMovingRight = false;
+//             player.isMovingLeft = false;
+//         }
+//     }, true);
 
     //Adding keyboard controls
     //添加键盘控件
