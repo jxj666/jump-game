@@ -200,8 +200,6 @@ function init() {
             gamma = event.gamma;
 
         if (alpha != null || beta != null || gamma != null) {
-
-            var gamma_html = "";
             if (gamma < -5) {
                 dir = "left";
                 player.isMovingLeft = true;
@@ -299,22 +297,32 @@ function init() {
 
         //Accelerations produces when the user hold the keys
         //当用户按住键时产生加速度
+        // if (player.isMovingLeft === true) {
+        //     player.x += player.vx;
+        //     player.vx -= 0.015;
+        // } else {
+        //     player.x += player.vx;
+        //     if (player.vx < 0) player.vx += 0.01;
+        // }
+
+        // if (player.isMovingRight === true) {
+        //     player.x += player.vx;
+        //     player.vx += 0.015;
+        // } else {
+        //     player.x += player.vx;
+        //     if (player.vx > 0) player.vx -= 0.01;
+        // }
         if (player.isMovingLeft === true) {
-            player.x += player.vx;
-            player.vx -= 0.015;
-        } else {
-            player.x += player.vx;
-            if (player.vx < 0) player.vx += 0.01;
+            player.x = -50
+           
+        }else if (player.isMovingRight === true) {
+            player.x = 50
+     
+        }else {
+            player.x =0
         }
 
-        if (player.isMovingRight === true) {
-            player.x += player.vx;
-            player.vx += 0.015;
-        } else {
-            player.x += player.vx;
-            if (player.vx > 0) player.vx -= 0.01;
-        }
-
+      
         // Speed limits!
         // 速度限制！
         if (player.vx > 3)
@@ -647,23 +655,23 @@ function playerJump() {
     //     }
     // };
 
-    //Accelerations produces when the user hold the keys
-    //当用户按住键时产生加速度
-    if (player.isMovingLeft === true) {
-        player.x += player.vx;
-        player.vx -= 0.05;
-    } else {
-        player.x += player.vx;
-        if (player.vx < 0) player.vx += 0.1;
-    }
+    // //Accelerations produces when the user hold the keys
+    // //当用户按住键时产生加速度
+    // if (player.isMovingLeft === true) {
+    //     player.x += player.vx;
+    //     player.vx -= 0.05;
+    // } else {
+    //     player.x += player.vx;
+    //     if (player.vx < 0) player.vx += 0.1;
+    // }
 
-    if (player.isMovingRight === true) {
-        player.x += player.vx;
-        player.vx += 0.05;
-    } else {
-        player.x += player.vx;
-        if (player.vx > 0) player.vx -= 0.1;
-    }
+    // if (player.isMovingRight === true) {
+    //     player.x += player.vx;
+    //     player.vx += 0.05;
+    // } else {
+    //     player.x += player.vx;
+    //     if (player.vx > 0) player.vx -= 0.1;
+    // }
 
     //Jump the player when it hits the base
     //当玩家击中基地时跳转
