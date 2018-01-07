@@ -1,43 +1,40 @@
 <!doctype html>
 <html>
-  <head>
+
+<head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>向上飞</title>
     <link rel="stylesheet" href="style.css">
-  </head>
-  <body>
+</head>
+
+<body>
     <div class="container">
-
-      <canvas id="canvas">
-      抱歉,您的设备不支持HTML5
-      </canvas>
-
-      <div id="mainMenu">
-        <h1>天天向上</h1>
-        <h3>版本0.04</h3>
-
-        <a class="button" href="javascript:init()">Play</a>
-      </div>
-
-      <div id="gameOverMenu">
-        <h1>游戏结束</h1>
-        <h3 id="go_score">你得了0分</h3>
-
-        <a class="button" href="javascript:reset()">开始</a>
-      </div>
-
-      <!-- Preloading image ;) -->
-      <img id="sprite" src="./img/2WEhF.png"/>
-
-      <div id="scoreBoard">
-        <p id="score">0</p>
-      </div>
-
+        <canvas id="canvas">
+            抱歉,您的设备不支持HTML5
+        </canvas>
+        <div id="mainMenu">
+            <h1>天天向上</h1>
+            <h3>版本0.04</h3>
+            <a class="button" href="javascript:init()">Play</a>
+        </div>
+        <div id="gameOverMenu">
+            <h1>游戏结束</h1>
+            <h3 id="go_score">你得了0分</h3>
+            <a class="button" href="javascript:reset()">开始</a>
+        </div>
+        <!-- Preloading image ;) -->
+        <img id="sprite" src="./img/2WEhF.png" />
+        <img id="z1" src="./img/z1.png" />
+        <img id="z2" src="./img/z2.png" />
+        <img id="cloud" src="./img/cloud.png" />
+        <div id="scoreBoard">
+            <p id="score">0</p>
+        </div>
     </div>
-
     <!-- <script src="game.js"></script> -->
     <script src="jquery.min.js"></script>
     <script src="total.js"></script>
-  </body>
+</body>
+
 </html>
