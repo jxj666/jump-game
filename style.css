@@ -19,7 +19,7 @@ canvas {
   height: 100%;
   width: 100%;
   display: block;
-  background: url(./img/gameBg.jpg) top left;
+  background: url(./img/gamebg.jpg) top left;
 }
 
 #scoreBoard {
@@ -62,6 +62,8 @@ h1 {
   color: #fff; 
   transform: rotate(-10deg);
   margin: 0px;
+  margin-top: 30%;
+  text-shadow: 0 0 5px #000;
 }
 
 h3 {text-align: right; margin: -10px 20px 0 0; color: #5e96be}
@@ -97,3 +99,12 @@ h3 a {color: #5a5816}
 
 .info .key.left {background-position: -92px -621px;}
 .info .key.right {background-position: -92px -641px;}
+.start_pop{
+  position: fixed;
+  top: 0;left: 0;right: 0;bottom: 0;
+  z-index: 10;
+  background: rgba(0,0,0,0.5) url(./img/download-1.png) no-repeat center center;
+}
+#go_score{
+  color: yellow;
+}

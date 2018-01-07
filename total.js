@@ -10,7 +10,8 @@ var platforms = [],
     image = document.getElementById("sprite"),
     z1 = document.getElementById("z1"),
     z2 = document.getElementById("z2"),
-    cloud = document.getElementById("cloud"),
+    cloud1 = document.getElementById("cloud1"),
+    base1 = document.getElementById("base1"),
     player, platformCount = 3,
     position = 0,
     gravity = 0.3,
@@ -26,13 +27,13 @@ var Base = function() {
     this.height = 5
     this.width = width
     this.cx = 0
-    this.cy = 614
-    this.cwidth = 100
+    this.cy = 0
+    this.cwidth = 50
     this.cheight = 5
     this.moved = 0
     this.x = 0
     this.y = height - this.height
-    this.draw = function() { try { ctx.drawImage(image, this.cx, this.cy, this.cwidth, this.cheight, this.x, this.y, this.width, this.height) } catch (e) {} }
+    this.draw = function() { try { ctx.drawImage(base1, this.cx, this.cy, this.cwidth, this.cheight, this.x, this.y, this.width, this.height) } catch (e) {} }
 }
 var base = new Base()
 //人物对象
@@ -42,17 +43,17 @@ var Player = function() {
     this.isMovingLeft = false
     this.isMovingRight = false
     this.isDead = false
-    this.width = 240
-    this.height = 320
-    this.cx = 0
+    this.width = 180
+    this.height = 310
+    this.cx = 20
     this.cy = 0
-    this.cwidth = 120
-    this.cheight = 160
+    this.cwidth = 90
+    this.cheight = 155
     this.dir = "left"
     this.x = width / 2 - this.width / 2
     this.y = height
     this.draw = function() { try { if (this.vy > 0) { ctx.drawImage(z2, this.cx, this.cy, this.cwidth, this.cheight, this.x, this.y, this.width, this.height) } else { ctx.drawImage(z1, this.cx, this.cy, this.cwidth, this.cheight, this.x, this.y, this.width, this.height) } } catch (e) {} }
-    this.jump = function() { this.vy = -18 }
+    this.jump = function() { this.vy = -16 }
 }
 player = new Player()
 //跳台对象
@@ -68,7 +69,7 @@ function Platform() {
     this.cy = 0
     this.cwidth = 220
     this.cheight = 60
-    this.draw = function() { try { if (this.type == 1) { this.cy = 0 } else { if (this.type == 2) { this.cy = 0 } } ctx.drawImage(cloud, this.cx, this.cy, this.cwidth, this.cheight, this.x, this.y, this.width, this.height) } catch (e) {} }
+    this.draw = function() { try { if (this.type == 1) { this.cy = 0 } else { if (this.type == 2) { this.cy = 0 } } ctx.drawImage(cloud1, this.cx, this.cy, this.cwidth, this.cheight, this.x, this.y, this.width, this.height) } catch (e) {} }
     if (score >= 5000) { this.types = [2, 2, 2, 2, 2] } else { if (score >= 2000 && score < 5000) { this.types = [1, 2, 2, 2, 2] } else { if (score >= 1000 && score < 2000) { this.types = [1, 1, 2, 2, 2] } else { if (score >= 500 && score < 1000) { this.types = [1, 1, 1, 2, 2] } else { if (score >= 100 && score < 500) { this.types = [1, 1, 1, 1, 2] } else { this.types = [1] } } } } } this.type = this.types[Math.floor(Math.random() * this.types.length)]
     this.moved = 0
     this.vx = 1
@@ -323,3 +324,9 @@ function throttle(method, context) {
 }
 window.onresize = function() { throttle(get_hfs) }
 get_hfs()
+
+//开始绑定
+$('.start_pop').on('click',function(){
+    $('.start_pop').hide()
+    init()
+})
