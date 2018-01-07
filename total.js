@@ -10,7 +10,7 @@ var platforms = [],
     image = document.getElementById("sprite"),
     z1 = document.getElementById("z1"),
     z2 = document.getElementById("z2"),
-    could = document.getElementById("could"),
+    cloud = document.getElementById("cloud"),
     player, platformCount = 5,
     position = 0,
     gravity = 0.2,
@@ -42,8 +42,8 @@ var Player = function() {
     this.isMovingLeft = false
     this.isMovingRight = false
     this.isDead = false
-    this.width = 120
-    this.height = 160  
+    this.width = 240
+    this.height = 320  
     this.cx = 0
     this.cy = 0
     this.cwidth = 120
@@ -52,12 +52,12 @@ var Player = function() {
     this.x = width / 2 - this.width / 2
     this.y = height
     this.draw = function() { try { if (this.dir == "right") { this.cy = 0 } else { if (this.dir == "left") { this.cy = 0 } else { if (this.dir == "right_land") { this.cy = 0 } else { if (this.dir == "left_land") { this.cy = 0 } } } } ctx.drawImage(z1, this.cx, this.cy, this.cwidth, this.cheight, this.x, this.y, this.width, this.height) } catch (e) {} }
-    this.jump = function() { this.vy = -8 }
+    this.jump = function() { this.vy = -12 }
 }
 player = new Player()
 //跳台对象
 function Platform() {
-    this.width = 200
+    this.width = 220
     this.height = 60
     this.x = Math.random() * (width - this.width)
     this.y = position
@@ -66,9 +66,9 @@ function Platform() {
     this.state = 0
     this.cx = 0
     this.cy = 0
-    this.cwidth = 200
+    this.cwidth = 220
     this.cheight = 60
-    this.draw = function() { try { if (this.type == 1) { this.cy = 0 } else { if (this.type == 2) { this.cy = 61 } } ctx.drawImage(image, this.cx, this.cy, this.cwidth, this.cheight, this.x, this.y, this.width, this.height) } catch (e) {} }
+    this.draw = function() { try { if (this.type == 1) { this.cy = 0 } else { if (this.type == 2) { this.cy = 0 } } ctx.drawImage(cloud, this.cx, this.cy, this.cwidth, this.cheight, this.x, this.y, this.width, this.height) } catch (e) {} }
     if (score >= 5000) { this.types = [2, 2, 2, 2, 2] } else { if (score >= 2000 && score < 5000) { this.types = [1, 2, 2, 2, 2] } else { if (score >= 1000 && score < 2000) { this.types = [1, 1, 2, 2, 2] } else { if (score >= 500 && score < 1000) { this.types = [1, 1, 1, 2, 2] } else { if (score >= 100 && score < 500) { this.types = [1, 1, 1, 1, 2] } else { this.types = [1] } } } } } this.type = this.types[Math.floor(Math.random() * this.types.length)]
     this.moved = 0
     this.vx = 1
