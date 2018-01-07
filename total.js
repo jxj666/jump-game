@@ -11,7 +11,7 @@ var platforms = [],
     z1 = document.getElementById("z1"),
     z2 = document.getElementById("z2"),
     cloud = document.getElementById("cloud"),
-    player, platformCount = 5,
+    player, platformCount = 3,
     position = 0,
     gravity = 0.2,
     animloop, flag = 0,
@@ -52,7 +52,7 @@ var Player = function() {
     this.x = width / 2 - this.width / 2
     this.y = height
     this.draw = function() { try { if (this.dir == "right") { this.cy = 0 } else { if (this.dir == "left") { this.cy = 0 } else { if (this.dir == "right_land") { this.cy = 0 } else { if (this.dir == "left_land") { this.cy = 0 } } } } ctx.drawImage(z1, this.cx, this.cy, this.cwidth, this.cheight, this.x, this.y, this.width, this.height) } catch (e) {} }
-    this.jump = function() { this.vy = -12 }
+    this.jump = function() { this.vy = -16 }
 }
 player = new Player()
 //跳台对象
