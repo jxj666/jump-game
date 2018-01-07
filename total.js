@@ -17,7 +17,7 @@ var platforms = [],
     flag = 0,
     menuloop, broken = 0,
     dir, score = 0,
-    i=0,
+    i = 0,
     firstRun = true;
 
 
@@ -172,62 +172,6 @@ for (var i = 0; i < platformCount; i++) {
     platforms.push(new Platform());
 }
 
-//Broken platform object
-//会破碎的平台 对象
-// var Platform_broken_substitute = function() {
-//     this.height = 30;
-//     this.width = 70;
-
-//     this.x = 0;
-//     this.y = 0;
-
-//     //Sprite clipping
-//     this.cx = 0;
-//     this.cy = 554;
-//     this.cwidth = 105;
-//     this.cheight = 60;
-
-//     this.appearance = false;
-
-//     this.draw = function() {
-//         try {
-//             if (this.appearance === true) ctx.drawImage(image, this.cx, this.cy, this.cwidth, this.cheight, this.x, this.y, this.width, this.height);
-//             else return;
-//         } catch (e) {}
-//     };
-// };
-// var platform_broken_substitute = new Platform_broken_substitute();
-
-//Spring Class
-// 加速器类
-// var spring = function() {
-//     this.x = 0;
-//     this.y = 0;
-
-//     this.width = 26;
-//     this.height = 30;
-
-//     //Sprite clipping
-//     //精灵剪辑
-//     this.cx = 0;
-//     this.cy = 0;
-//     this.cwidth = 45;
-//     this.cheight = 53;
-
-//     this.state = 0;
-
-//     this.draw = function() {
-//         try {
-//             if (this.state === 0) this.cy = 445;
-//             else if (this.state == 1) this.cy = 501;
-
-//             ctx.drawImage(image, this.cx, this.cy, this.cwidth, this.cheight, this.x, this.y, this.width, this.height);
-//         } catch (e) {}
-//     };
-// };
-// var Spring = new spring();
-
-
 //初始化
 function init() {
     //Variables for the game
@@ -243,9 +187,68 @@ function init() {
     function paintCanvas() {
         ctx.clearRect(0, 0, width, height);
     }
+    if (window.DeviceOrientationEvent) {
+        window.addEventListener('deviceorientation', DeviceOrientationHandler, false);
+    } else {
+        console.log('DeviceOrientationEvent不支持!');
+    }
 
+
+    function DeviceOrientationHandler(event) {
+        var alpha = event.alpha,
+            beta = event.beta,
+            gamma = event.gamma;
+
+        if (alpha != null || beta != null || gamma != null) {
+
+            var gamma_html = "";
+            if (gamma < -10) {
+                dir = "left";
+                player.isMovingLeft = true;
+            } else if (gamma > 10) {
+                dir = "right";
+                player.isMovingRight = true;
+            } else {
+                player.isMovingRight = false;
+                player.isMovingLeft = false;
+            }
+
+        } else {
+            console.log('设备不支持!');
+        }
+    }
     //Player related calculations and functions
     //玩家相关的计算和功能
+    document.onkeydown = function(e) {
+        var key = e.keyCode;
+
+        if (key == 37) {
+            dir = "left";
+            player.isMovingLeft = true;
+        } else if (key == 39) {
+            dir = "right";
+            player.isMovingRight = true;
+        }
+
+        if (key == 32) {
+            if (firstRun === true)
+                init();
+            else
+                reset();
+        }
+    };
+
+    document.onkeyup = function(e) {
+        var key = e.keyCode;
+
+        if (key == 37) {
+            dir = "left";
+            player.isMovingLeft = false;
+        } else if (key == 39) {
+            dir = "right";
+            player.isMovingRight = false;
+        }
+    };
 
     function playerCalc() {
         if (dir == "left") {
@@ -289,39 +292,10 @@ function init() {
 
 
 
-
+        console.log(i++ + '2')
         // //Adding keyboard controls
-        // //添加键盘控件
-        // document.onkeydown = function(e) {
-        //     var key = e.keyCode;
+        //添加键盘控件
 
-        //     if (key == 37) {
-        //         dir = "left";
-        //         player.isMovingLeft = true;
-        //     } else if (key == 39) {
-        //         dir = "right";
-        //         player.isMovingRight = true;
-        //     }
-
-        //     if (key == 32) {
-        //         if (firstRun === true)
-        //             init();
-        //         else
-        //             reset();
-        //     }
-        // };
-
-        // document.onkeyup = function(e) {
-        //     var key = e.keyCode;
-
-        //     if (key == 37) {
-        //         dir = "left";
-        //         player.isMovingLeft = false;
-        //     } else if (key == 39) {
-        //         dir = "right";
-        //         player.isMovingRight = false;
-        //     }
-        // };
 
         //Accelerations produces when the user hold the keys
         //当用户按住键时产生加速度
@@ -537,40 +511,6 @@ function init() {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 //重置
 function reset() {
     hideGoMenu();
@@ -651,7 +591,7 @@ function playerJump() {
         player.dir = "right";
         if (player.vy < -7 && player.vy > -15) player.dir = "right_land";
     }
-
+    console.log(i++ + '1')
 
     // if (window.DeviceOrientationEvent) {
     //     console.log('true');
@@ -675,37 +615,37 @@ function playerJump() {
 
     //Adding keyboard controls
     //添加键盘控件
-    document.onkeydown = function(e) {
-        var key = e.keyCode;
+    // document.onkeydown = function(e) {
+    //     var key = e.keyCode;
 
-        if (key == 37) {
-            dir = "left";
-            player.isMovingLeft = true;
-        } else if (key == 39) {
-            dir = "right";
-            player.isMovingRight = true;
-        }
+    //     if (key == 37) {
+    //         dir = "left";
+    //         player.isMovingLeft = true;
+    //     } else if (key == 39) {
+    //         dir = "right";
+    //         player.isMovingRight = true;
+    //     }
 
-        if (key == 32) {
-            if (firstRun === true) {
-                init();
-                firstRun = false;
-            } else
-                reset();
-        }
-    };
+    //     if (key == 32) {
+    //         if (firstRun === true) {
+    //             init();
+    //             firstRun = false;
+    //         } else
+    //             reset();
+    //     }
+    // };
 
-    document.onkeyup = function(e) {
-        var key = e.keyCode;
+    // document.onkeyup = function(e) {
+    //     var key = e.keyCode;
 
-        if (key == 37) {
-            dir = "left";
-            player.isMovingLeft = false;
-        } else if (key == 39) {
-            dir = "right";
-            player.isMovingRight = false;
-        }
-    };
+    //     if (key == 37) {
+    //         dir = "left";
+    //         player.isMovingLeft = false;
+    //     } else if (key == 39) {
+    //         dir = "right";
+    //         player.isMovingRight = false;
+    //     }
+    // };
 
     //Accelerations produces when the user hold the keys
     //当用户按住键时产生加速度
@@ -757,6 +697,8 @@ menuLoop = function() {
 function get_hfs() {
     $('.container').css('height', $(window).height());
     $('.container').css('width', $(window).width());
+    $('#canvas').css('height', $(window).height());
+    $('#canvas').css('width', $(window).width());
 }
 get_hfs();
 
