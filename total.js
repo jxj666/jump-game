@@ -202,10 +202,10 @@ function init() {
         if (alpha != null || beta != null || gamma != null) {
 
             var gamma_html = "";
-            if (gamma < -10) {
+            if (gamma < -5) {
                 dir = "left";
                 player.isMovingLeft = true;
-            } else if (gamma > 10) {
+            } else if (gamma > 5) {
                 dir = "right";
                 player.isMovingRight = true;
             } else {
@@ -301,7 +301,7 @@ function init() {
         //当用户按住键时产生加速度
         if (player.isMovingLeft === true) {
             player.x += player.vx;
-            player.vx -= 0.05;
+            player.vx -= 0.015;
         } else {
             player.x += player.vx;
             if (player.vx < 0) player.vx += 0.01;
@@ -309,7 +309,7 @@ function init() {
 
         if (player.isMovingRight === true) {
             player.x += player.vx;
-            player.vx += 0.05;
+            player.vx += 0.015;
         } else {
             player.x += player.vx;
             if (player.vx > 0) player.vx -= 0.01;
