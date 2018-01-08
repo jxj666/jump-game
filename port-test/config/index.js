@@ -43,7 +43,7 @@ module.exports = {
     // Paths
     assetsRoot: path.resolve(__dirname, '../dist'),
     assetsSubDirectory: 'static',
-    assetsPublicPath: '//weiop.oss-cn-beijing.aliyuncs.com/jiangxi8-28/',
+    assetsPublicPath: '//weiop.oss-cn-beijing.aliyuncs.com/jiangxi8-28/game/',
 
     /**
      * Source Maps
