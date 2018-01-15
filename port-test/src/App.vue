@@ -5,6 +5,7 @@
 </template>
 <script>
 import Game from '@/components/Game'
+var $ = require("jquery")
 export default {
   name: 'app',
   data() {
@@ -26,10 +27,9 @@ export default {
     window.onresize = function() {
       throttle(get_hfs)
     }
-    console.log(window.screen.availHeight)
   },
   beforeMount(){
-    this.hightSize=window.screen.availHeight
+    this.hightSize=$(window).height()
   }
 }
 
@@ -44,6 +44,7 @@ export default {
   background: #7d0011 url(./assets/back.jpg) no-repeat 0 0;
   background-size: 7.5rem auto;
   overflow-x: hidden;
+  overflow-y:auto;
   box-sizing: border-box;
   padding: 0rem;
   margin: 0;

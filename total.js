@@ -1,3 +1,15 @@
+//验证可玩性
+function ready() {
+    if (sessionStorage.ready == 2) {
+        sessionStorage.ready = ''
+    } else {
+        location.href = "/a/p/redpack-game.html"
+    }
+}
+ready()
+
+
+
 // 设置画布
 var canvas = document.getElementById("canvas"),
     ctx = canvas.getContext("2d")
@@ -7,19 +19,23 @@ canvas.width = width
 canvas.height = height
 //设置游戏参数
 var platforms = [],
-    image = document.getElementById("sprite"),
     z1 = document.getElementById("z1"),
     z2 = document.getElementById("z2"),
     cloud1 = document.getElementById("cloud1"),
     base1 = document.getElementById("base1"),
+    music1 = document.getElementById("music1"),
+    music2 = document.getElementById("music2"),
+    video1 = document.getElementById("video1"),
     player, platformCount = 3,
     position = 0,
     gravity = 0.3,
     animloop, flag = 0,
     menuloop, broken = 0,
-    dir, score = 0,
+    cloud_v = 1,
+    score = 0,
     i = 0,
-    firstRun = true
+    firstRun = true,
+    restart = 0
 //浏览器流畅动画 api
 window.requestAnimFrame = (function() { return window.requestAnimationFrame || window.webkitRequestAnimationFrame || window.mozRequestAnimationFrame || window.oRequestAnimationFrame || window.msRequestAnimationFrame || function(callback) { window.setTimeout(callback, 1000 / 60) } })()
 //地板对象
@@ -28,7 +44,7 @@ var Base = function() {
     this.width = width
     this.cx = 0
     this.cy = 0
-    this.cwidth = 50
+    this.cwidth = 40
     this.cheight = 5
     this.moved = 0
     this.x = 0
@@ -40,8 +56,8 @@ var base = new Base()
 var Player = function() {
     this.vy = 11
     this.vx = 0
-    this.isMovingLeft = false
-    this.isMovingRight = false
+    this.isMoving = 0
+
     this.isDead = false
     this.width = 180
     this.height = 310
@@ -49,11 +65,21 @@ var Player = function() {
     this.cy = 0
     this.cwidth = 90
     this.cheight = 155
-    this.dir = "left"
     this.x = width / 2 - this.width / 2
     this.y = height
     this.draw = function() { try { if (this.vy > 0) { ctx.drawImage(z2, this.cx, this.cy, this.cwidth, this.cheight, this.x, this.y, this.width, this.height) } else { ctx.drawImage(z1, this.cx, this.cy, this.cwidth, this.cheight, this.x, this.y, this.width, this.height) } } catch (e) {} }
-    this.jump = function() { this.vy = -16 }
+    this.jump = function() {
+        if ($('.music_btn').hasClass('music_btn_type1')) {
+            music2.play();
+        } else {
+
+        }
+        if (score > 1000) {
+            this.vy = -18 - parseInt(String(score).slice(0, -3))*2
+        } else {
+            this.vy = -18
+        }
+    }
 }
 player = new Player()
 //跳台对象
@@ -70,16 +96,22 @@ function Platform() {
     this.cwidth = 220
     this.cheight = 60
     this.draw = function() { try { if (this.type == 1) { this.cy = 0 } else { if (this.type == 2) { this.cy = 0 } } ctx.drawImage(cloud1, this.cx, this.cy, this.cwidth, this.cheight, this.x, this.y, this.width, this.height) } catch (e) {} }
-    if (score >= 5000) { this.types = [2, 2, 2, 2, 2] } else { if (score >= 2000 && score < 5000) { this.types = [1, 2, 2, 2, 2] } else { if (score >= 1000 && score < 2000) { this.types = [1, 1, 2, 2, 2] } else { if (score >= 500 && score < 1000) { this.types = [1, 1, 1, 2, 2] } else { if (score >= 100 && score < 500) { this.types = [1, 1, 1, 1, 2] } else { this.types = [1] } } } } } this.type = this.types[Math.floor(Math.random() * this.types.length)]
+    if (score >= 5000) { this.types = [2, 2, 2, 2, 2] } else { if (score >= 2000 && score < 5000) { this.types = [1, 1, 2, 2, 2] } else { if (score >= 1000 && score < 2000) { this.types = [1, 1, 2, 2, 2] } else { if (score >= 500 && score < 1000) { this.types = [1, 1, 1, 1, 2] } else { if (score >= 100 && score < 500) { this.types = [1, 1, 1, 1, 1] } else { this.types = [1] } } } } } this.type = this.types[Math.floor(Math.random() * this.types.length)]
     this.moved = 0
-    this.vx = 1
+    if (score > 1000) {
+        cloud_v = parseInt(String(score).slice(0, -3))
+    }
+    this.vx = Math.round(Math.random() * cloud_v) + 1
 }
 for (var i = 0; i < platformCount; i++) { platforms.push(new Platform()) }
 //初始化
 function init() {
-    var dir = "left",
-        jumpCount = 0
+    var jumpCount = 0
     firstRun = false
+    music1.play();
+    $('.music_btn').addClass('music_btn_type1');
+    $('.music_btn').css("animation", 'spin 2s infinite linear');
+    $('.img_box img').attr('src', sessionStorage.user_avatar);
 
     function paintCanvas() { ctx.clearRect(0, 0, width, height) }
     if (window.DeviceOrientationEvent) { window.addEventListener("deviceorientation", DeviceOrientationHandler, false) } else { console.log("DeviceOrientationEvent不支持!") }
@@ -88,31 +120,26 @@ function init() {
         var alpha = event.alpha,
             beta = event.beta,
             gamma = event.gamma
-        if (alpha != null || beta != null || gamma != null) {
-            var gamma_html = ""
-            if (gamma < -10) {
-                dir = "left"
-                player.isMovingLeft = true
-            } else {
-                if (gamma > 10) {
-                    dir = "right"
-                    player.isMovingRight = true
-                } else {
-                    player.isMovingRight = false
-                    player.isMovingLeft = false
-                }
-            }
+
+        player.isMoving = 0
+        if (gamma != null) {
+            player.isMoving = Math.floor(gamma / 3)
         } else { console.log("设备不支持!") }
+        $('#info .test1').text(gamma)
+        $('#info .test2').text(player.vx)
+        $('#info .test3').text(player.x)
+
+
     }
     document.onkeydown = function(e) {
         var key = e.keyCode
         if (key == 37) {
-            dir = "left"
-            player.isMovingLeft = true
+
+            player.isMoving = -9
         } else {
             if (key == 39) {
-                dir = "right"
-                player.isMovingRight = true
+
+                player.isMoving = 9
             }
         }
         if (key == 32) { if (firstRun === true) { init() } else { reset() } }
@@ -120,42 +147,22 @@ function init() {
     document.onkeyup = function(e) {
         var key = e.keyCode
         if (key == 37) {
-            dir = "left"
-            player.isMovingLeft = false
+
+            player.isMoving = 0
         } else {
             if (key == 39) {
-                dir = "right"
-                player.isMovingRight = false
+
+                player.isMoving = 0
             }
         }
     }
 
     function playerCalc() {
-        if (dir == "left") {
-            player.dir = "left"
-            if (player.vy < -7 && player.vy > -15) { player.dir = "left_land" }
-        } else {
-            if (dir == "right") {
-                player.dir = "right"
-                if (player.vy < -7 && player.vy > -15) { player.dir = "right_land" }
-            }
-        }
-        console.log(i++ + "2")
-        if (player.isMovingLeft === true) {
-            player.x += player.vx
-            player.vx -= 0.15
-        } else {
-            player.x += player.vx
-            if (player.vx < 0) { player.vx += 0.1 }
-        }
-        if (player.isMovingRight === true) {
-            player.x += player.vx
-            player.vx += 0.15
-        } else {
-            player.x += player.vx
-            if (player.vx > 0) { player.vx -= 0.1 }
-        }
-        if (player.vx > 3) { player.vx = 3 } else { if (player.vx < -3) { player.vx = -3 } }
+
+        player.x += player.vx
+        player.vx = player.isMoving
+
+        if (player.vx > 20) { player.vx = 20 } else { if (player.vx < -20) { player.vx = -20 } }
         if ((player.y + player.height) > base.y && base.y < height) { player.jump() }
         if (base.y > height && (player.y + player.height) > height && player.isDead != "lol") { player.isDead = true }
         if (player.x > width) { player.x = 0 - player.width } else { if (player.x < 0 - player.width) { player.x = width } }
@@ -184,11 +191,11 @@ function init() {
 
     function platformCalc() { platforms.forEach(function(p, i) { if (p.type == 2) { if (p.x < 0 || p.x + p.width > width) { p.vx *= -1 } p.x += p.vx } p.draw() }) }
 
-    function collides() { platforms.forEach(function(p, i) { if (player.vy > 0 && p.state === 0 && (player.x + 15 < p.x + p.width) && (player.x + player.width - 15 > p.x) && (player.y + player.height > p.y) && (player.y + player.height < p.y + p.height)) { player.jump() } }) }
+    function collides() { platforms.forEach(function(p, i) { if (player.vy > 0 && p.state === 0 && (player.x + 60 < p.x + p.width) && (player.x + player.width - 60 > p.x) && (player.y + player.height > p.y) && (player.y + player.height < p.y + p.height)) { player.jump() } }) }
 
     function updateScore() {
         var scoreText = document.getElementById("score")
-        scoreText.innerHTML = score
+        scoreText.innerHTML = String(score).slice(0, -1)
     }
 
     function gameOver() {
@@ -244,11 +251,17 @@ function hideMenu() {
 }
 //显示得分菜单
 function showGoMenu() {
-    var menu = document.getElementById("gameOverMenu")
-    menu.style.zIndex = 1
-    menu.style.visibility = "visible"
-    var scoreText = document.getElementById("go_score")
-    scoreText.innerHTML = "你的得分" + score
+    if (score < 500) {
+        $('.start_pop').show()
+    } else {
+        var menu = document.getElementById("gameOverMenu")
+        menu.style.zIndex = 1
+        menu.style.visibility = "visible"
+        var scoreText = document.getElementById("go_score")
+        scoreText.innerHTML = "你的得分" + String(score).slice(0, -1)
+        sessionStorage.score = score
+        sessionStorage.gamed = true
+    }
 }
 //隐藏得分菜单
 function hideGoMenu() {
@@ -271,30 +284,12 @@ function playerJump() {
     player.y += player.vy
     player.vy += gravity
     if (player.vy > 0 && (player.x + 15 < 260) && (player.x + player.width - 15 > 155) && (player.y + player.height > 475) && (player.y + player.height < 500)) { player.jump() }
-    if (dir == "left") {
-        player.dir = "left"
-        if (player.vy < -7 && player.vy > -15) { player.dir = "left_land" }
-    } else {
-        if (dir == "right") {
-            player.dir = "right"
-            if (player.vy < -7 && player.vy > -15) { player.dir = "right_land" }
-        }
-    }
-    console.log(i++ + "1")
-    if (player.isMovingLeft === true) {
-        player.x += player.vx
-        player.vx -= 0.05
-    } else {
-        player.x += player.vx
-        if (player.vx < 0) { player.vx += 0.1 }
-    }
-    if (player.isMovingRight === true) {
-        player.x += player.vx
-        player.vx += 0.05
-    } else {
-        player.x += player.vx
-        if (player.vx > 0) { player.vx -= 0.1 }
-    }
+
+
+    player.x += player.vx
+    player.vx = player.isMoving
+
+
     if ((player.y + player.height) > base.y && base.y < height) { player.jump() }
     if (player.x > width) { player.x = 0 - player.width } else { if (player.x < 0 - player.width) { player.x = width } } player.draw()
 }
@@ -326,7 +321,34 @@ window.onresize = function() { throttle(get_hfs) }
 get_hfs()
 
 //开始绑定
-$('.start_pop').on('click',function(){
+$('.start_pop').on('click', function() {
+
     $('.start_pop').hide()
-    init()
+    if (restart == 0) {
+        init()
+        restart = 1
+    } else {
+        reset()
+    }
+
 })
+//音乐
+$('.music_btn').on('click', function(e) {
+    if ($('.music_btn').hasClass('music_btn_type1')) {
+        music1.pause();
+        $('.music_btn').css("animation", 'spin 1s linear');
+        $('.music_btn').removeClass('music_btn_type1');
+        $('.music_btn').addClass('music_btn_type2');
+    } else {
+        music1.play();
+        $('.music_btn').css("animation", 'spin 2s infinite linear');
+        $('.music_btn').removeClass('music_btn_type2');
+        $('.music_btn').addClass('music_btn_type1');
+    }
+})
+
+//抽奖
+function get_award() {
+    history.back();
+}
+
