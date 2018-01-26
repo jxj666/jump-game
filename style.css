@@ -220,3 +220,18 @@ h3 a {
     }
 }
 
+#hint {
+    z-index: 100;
+    position: fixed;
+    line-height: 20px;
+    height: 20px;
+    bottom: 10px;
+    width: 100%;
+    display: none;
+    text-align: center;
+}
+
+#hint .hint1 {
+    font-size: 16px;
+    color: #fff;
+}

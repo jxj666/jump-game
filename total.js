@@ -75,7 +75,7 @@ var Player = function() {
 
         }
         if (score > 1000) {
-            this.vy = -18 - parseInt(String(score).slice(0, -3))*2
+            this.vy = -18 - parseInt(String(score).slice(0, -3)) * 2
         } else {
             this.vy = -18
         }
@@ -124,7 +124,7 @@ function init() {
         player.isMoving = 0
         if (gamma != null) {
             player.isMoving = Math.floor(gamma / 3)
-        } else { console.log("设备不支持!") }
+        } else { console.log("重力感应不支持!") }
         $('#info .test1').text(gamma)
         $('#info .test2').text(player.vx)
         $('#info .test3').text(player.x)
@@ -161,11 +161,20 @@ function init() {
 
         player.x += player.vx
         player.vx = player.isMoving
-
+        //横向速度限定
         if (player.vx > 20) { player.vx = 20 } else { if (player.vx < -20) { player.vx = -20 } }
+
         if ((player.y + player.height) > base.y && base.y < height) { player.jump() }
+
+        if (score < 200 && player.y > 850) {
+            player.jump()
+            hint()
+        }
+
         if (base.y > height && (player.y + player.height) > height && player.isDead != "lol") { player.isDead = true }
+
         if (player.x > width) { player.x = 0 - player.width } else { if (player.x < 0 - player.width) { player.x = width } }
+
         if (player.y >= (height / 2) - (player.height / 2)) {
             player.y += player.vy
             player.vy += gravity
@@ -188,6 +197,7 @@ function init() {
         collides()
         if (player.isDead === true) { gameOver() }
     }
+
 
     function platformCalc() { platforms.forEach(function(p, i) { if (p.type == 2) { if (p.x < 0 || p.x + p.width > width) { p.vx *= -1 } p.x += p.vx } p.draw() }) }
 
@@ -251,7 +261,7 @@ function hideMenu() {
 }
 //显示得分菜单
 function showGoMenu() {
-    if (score < 500) {
+    if (score < 100) {
         $('.start_pop').show()
     } else {
         var menu = document.getElementById("gameOverMenu")
@@ -293,7 +303,13 @@ function playerJump() {
     if ((player.y + player.height) > base.y && base.y < height) { player.jump() }
     if (player.x > width) { player.x = 0 - player.width } else { if (player.x < 0 - player.width) { player.x = width } } player.draw()
 }
-
+//提示
+function hint() {
+    $('#hint').show()
+    setTimeout(function() {
+        $('#hint').hide()
+    }, 1000)
+}
 //更新绘图
 function update() {
     ctx.clearRect(0, 0, width, height)
@@ -351,4 +367,3 @@ $('.music_btn').on('click', function(e) {
 function get_award() {
     history.back();
 }
-
