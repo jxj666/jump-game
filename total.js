@@ -1,15 +1,3 @@
-//验证可玩性
-function ready() {
-    if (sessionStorage.ready == 2) {
-        sessionStorage.ready = ''
-    } else {
-        location.href = "/a/p/redpack-game.html"
-    }
-}
-ready()
-
-
-
 // 设置画布
 var canvas = document.getElementById("canvas"),
     ctx = canvas.getContext("2d")
@@ -37,9 +25,13 @@ var platforms = [],
     firstRun = true,
     restart = 0
 //浏览器流畅动画 api
-window.requestAnimFrame = (function() { return window.requestAnimationFrame || window.webkitRequestAnimationFrame || window.mozRequestAnimationFrame || window.oRequestAnimationFrame || window.msRequestAnimationFrame || function(callback) { window.setTimeout(callback, 1000 / 60) } })()
+window.requestAnimFrame = (function () {
+    return window.requestAnimationFrame || window.webkitRequestAnimationFrame || window.mozRequestAnimationFrame || window.oRequestAnimationFrame || window.msRequestAnimationFrame || function (callback) {
+        window.setTimeout(callback, 1000 / 60)
+    }
+})()
 //地板对象
-var Base = function() {
+var Base = function () {
     this.height = 5
     this.width = width
     this.cx = 0
@@ -49,11 +41,15 @@ var Base = function() {
     this.moved = 0
     this.x = 0
     this.y = height - this.height
-    this.draw = function() { try { ctx.drawImage(base1, this.cx, this.cy, this.cwidth, this.cheight, this.x, this.y, this.width, this.height) } catch (e) {} }
+    this.draw = function () {
+        try {
+            ctx.drawImage(base1, this.cx, this.cy, this.cwidth, this.cheight, this.x, this.y, this.width, this.height)
+        } catch (e) {}
+    }
 }
 var base = new Base()
 //人物对象
-var Player = function() {
+var Player = function () {
     this.vy = 11
     this.vx = 0
     this.isMoving = 0
@@ -67,8 +63,16 @@ var Player = function() {
     this.cheight = 155
     this.x = width / 2 - this.width / 2
     this.y = height
-    this.draw = function() { try { if (this.vy > 0) { ctx.drawImage(z2, this.cx, this.cy, this.cwidth, this.cheight, this.x, this.y, this.width, this.height) } else { ctx.drawImage(z1, this.cx, this.cy, this.cwidth, this.cheight, this.x, this.y, this.width, this.height) } } catch (e) {} }
-    this.jump = function() {
+    this.draw = function () {
+        try {
+            if (this.vy > 0) {
+                ctx.drawImage(z2, this.cx, this.cy, this.cwidth, this.cheight, this.x, this.y, this.width, this.height)
+            } else {
+                ctx.drawImage(z1, this.cx, this.cy, this.cwidth, this.cheight, this.x, this.y, this.width, this.height)
+            }
+        } catch (e) {}
+    }
+    this.jump = function () {
         if ($('.music_btn').hasClass('music_btn_type1')) {
             music2.play();
         } else {
@@ -95,15 +99,49 @@ function Platform() {
     this.cy = 0
     this.cwidth = 220
     this.cheight = 60
-    this.draw = function() { try { if (this.type == 1) { this.cy = 0 } else { if (this.type == 2) { this.cy = 0 } } ctx.drawImage(cloud1, this.cx, this.cy, this.cwidth, this.cheight, this.x, this.y, this.width, this.height) } catch (e) {} }
-    if (score >= 5000) { this.types = [2, 2, 2, 2, 2] } else { if (score >= 2000 && score < 5000) { this.types = [1, 1, 2, 2, 2] } else { if (score >= 1000 && score < 2000) { this.types = [1, 1, 2, 2, 2] } else { if (score >= 500 && score < 1000) { this.types = [1, 1, 1, 1, 2] } else { if (score >= 100 && score < 500) { this.types = [1, 1, 1, 1, 1] } else { this.types = [1] } } } } } this.type = this.types[Math.floor(Math.random() * this.types.length)]
+    this.draw = function () {
+        try {
+            if (this.type == 1) {
+                this.cy = 0
+            } else {
+                if (this.type == 2) {
+                    this.cy = 0
+                }
+            }
+            ctx.drawImage(cloud1, this.cx, this.cy, this.cwidth, this.cheight, this.x, this.y, this.width, this.height)
+        } catch (e) {}
+    }
+    if (score >= 5000) {
+        this.types = [2, 2, 2, 2, 2]
+    } else {
+        if (score >= 2000 && score < 5000) {
+            this.types = [1, 1, 2, 2, 2]
+        } else {
+            if (score >= 1000 && score < 2000) {
+                this.types = [1, 1, 2, 2, 2]
+            } else {
+                if (score >= 500 && score < 1000) {
+                    this.types = [1, 1, 1, 1, 2]
+                } else {
+                    if (score >= 100 && score < 500) {
+                        this.types = [1, 1, 1, 1, 1]
+                    } else {
+                        this.types = [1]
+                    }
+                }
+            }
+        }
+    }
+    this.type = this.types[Math.floor(Math.random() * this.types.length)]
     this.moved = 0
     if (score > 1000) {
         cloud_v = parseInt(String(score).slice(0, -3))
     }
     this.vx = Math.round(Math.random() * cloud_v) + 1
 }
-for (var i = 0; i < platformCount; i++) { platforms.push(new Platform()) }
+for (var i = 0; i < platformCount; i++) {
+    platforms.push(new Platform())
+}
 //初始化
 function init() {
     var jumpCount = 0
@@ -113,8 +151,14 @@ function init() {
     $('.music_btn').css("animation", 'spin 2s infinite linear');
     $('.img_box img').attr('src', sessionStorage.user_avatar);
 
-    function paintCanvas() { ctx.clearRect(0, 0, width, height) }
-    if (window.DeviceOrientationEvent) { window.addEventListener("deviceorientation", DeviceOrientationHandler, false) } else { console.log("DeviceOrientationEvent不支持!") }
+    function paintCanvas() {
+        ctx.clearRect(0, 0, width, height)
+    }
+    if (window.DeviceOrientationEvent) {
+        window.addEventListener("deviceorientation", DeviceOrientationHandler, false)
+    } else {
+        console.log("DeviceOrientationEvent不支持!")
+    }
 
     function DeviceOrientationHandler(event) {
         var alpha = event.alpha,
@@ -124,14 +168,16 @@ function init() {
         player.isMoving = 0
         if (gamma != null) {
             player.isMoving = Math.floor(gamma / 3)
-        } else { console.log("重力感应不支持!") }
+        } else {
+            console.log("重力感应不支持!")
+        }
         $('#info .test1').text(gamma)
         $('#info .test2').text(player.vx)
         $('#info .test3').text(player.x)
 
 
     }
-    document.onkeydown = function(e) {
+    document.onkeydown = function (e) {
         var key = e.keyCode
         if (key == 37) {
 
@@ -142,9 +188,15 @@ function init() {
                 player.isMoving = 9
             }
         }
-        if (key == 32) { if (firstRun === true) { init() } else { reset() } }
+        if (key == 32) {
+            if (firstRun === true) {
+                init()
+            } else {
+                reset()
+            }
+        }
     }
-    document.onkeyup = function(e) {
+    document.onkeyup = function (e) {
         var key = e.keyCode
         if (key == 37) {
 
@@ -162,25 +214,43 @@ function init() {
         player.x += player.vx
         player.vx = player.isMoving
         //横向速度限定
-        if (player.vx > 20) { player.vx = 20 } else { if (player.vx < -20) { player.vx = -20 } }
+        if (player.vx > 20) {
+            player.vx = 20
+        } else {
+            if (player.vx < -20) {
+                player.vx = -20
+            }
+        }
 
-        if ((player.y + player.height) > base.y && base.y < height) { player.jump() }
+        if ((player.y + player.height) > base.y && base.y < height) {
+            player.jump()
+        }
 
         if (score < 200 && player.y > 850) {
             player.jump()
             hint()
         }
 
-        if (base.y > height && (player.y + player.height) > height && player.isDead != "lol") { player.isDead = true }
+        if (base.y > height && (player.y + player.height) > height && player.isDead != "lol") {
+            player.isDead = true
+        }
 
-        if (player.x > width) { player.x = 0 - player.width } else { if (player.x < 0 - player.width) { player.x = width } }
+        if (player.x > width) {
+            player.x = 0 - player.width
+        } else {
+            if (player.x < 0 - player.width) {
+                player.x = width
+            }
+        }
 
         if (player.y >= (height / 2) - (player.height / 2)) {
             player.y += player.vy
             player.vy += gravity
         } else {
-            platforms.forEach(function(p, i) {
-                if (player.vy < 0) { p.y -= player.vy }
+            platforms.forEach(function (p, i) {
+                if (player.vy < 0) {
+                    p.y -= player.vy
+                }
                 if (p.y > height) {
                     platforms[i] = new Platform()
                     platforms[i].y = p.y - height
@@ -195,13 +265,31 @@ function init() {
             score++
         }
         collides()
-        if (player.isDead === true) { gameOver() }
+        if (player.isDead === true) {
+            gameOver()
+        }
     }
 
 
-    function platformCalc() { platforms.forEach(function(p, i) { if (p.type == 2) { if (p.x < 0 || p.x + p.width > width) { p.vx *= -1 } p.x += p.vx } p.draw() }) }
+    function platformCalc() {
+        platforms.forEach(function (p, i) {
+            if (p.type == 2) {
+                if (p.x < 0 || p.x + p.width > width) {
+                    p.vx *= -1
+                }
+                p.x += p.vx
+            }
+            p.draw()
+        })
+    }
 
-    function collides() { platforms.forEach(function(p, i) { if (player.vy > 0 && p.state === 0 && (player.x + 60 < p.x + p.width) && (player.x + player.width - 60 > p.x) && (player.y + player.height > p.y) && (player.y + player.height < p.y + p.height)) { player.jump() } }) }
+    function collides() {
+        platforms.forEach(function (p, i) {
+            if (player.vy > 0 && p.state === 0 && (player.x + 60 < p.x + p.width) && (player.x + player.width - 60 > p.x) && (player.y + player.height > p.y) && (player.y + player.height < p.y + p.height)) {
+                player.jump()
+            }
+        })
+    }
 
     function updateScore() {
         var scoreText = document.getElementById("score")
@@ -209,12 +297,16 @@ function init() {
     }
 
     function gameOver() {
-        platforms.forEach(function(p, i) { p.y -= 12 })
+        platforms.forEach(function (p, i) {
+            p.y -= 12
+        })
         if (player.y > height / 2 && flag === 0) {
             player.y -= 8
             player.vy = 0
         } else {
-            if (player.y < height / 2) { flag = 1 } else {
+            if (player.y < height / 2) {
+                flag = 1
+            } else {
                 if (player.y + player.height > height) {
                     showGoMenu()
                     hideScore()
@@ -232,8 +324,10 @@ function init() {
         base.draw()
         updateScore()
     }
-    menuLoop = function() { return }
-    animloop = function() {
+    menuLoop = function () {
+        return
+    }
+    animloop = function () {
         update()
         requestAnimFrame(animloop)
     }
@@ -252,7 +346,9 @@ function reset() {
     base = new Base()
     player = new Player()
     platforms = []
-    for (var i = 0; i < platformCount; i++) { platforms.push(new Platform()) }
+    for (var i = 0; i < platformCount; i++) {
+        platforms.push(new Platform())
+    }
 }
 //隐藏主菜单
 function hideMenu() {
@@ -293,20 +389,31 @@ function hideScore() {
 function playerJump() {
     player.y += player.vy
     player.vy += gravity
-    if (player.vy > 0 && (player.x + 15 < 260) && (player.x + player.width - 15 > 155) && (player.y + player.height > 475) && (player.y + player.height < 500)) { player.jump() }
+    if (player.vy > 0 && (player.x + 15 < 260) && (player.x + player.width - 15 > 155) && (player.y + player.height > 475) && (player.y + player.height < 500)) {
+        player.jump()
+    }
 
 
     player.x += player.vx
     player.vx = player.isMoving
 
 
-    if ((player.y + player.height) > base.y && base.y < height) { player.jump() }
-    if (player.x > width) { player.x = 0 - player.width } else { if (player.x < 0 - player.width) { player.x = width } } player.draw()
+    if ((player.y + player.height) > base.y && base.y < height) {
+        player.jump()
+    }
+    if (player.x > width) {
+        player.x = 0 - player.width
+    } else {
+        if (player.x < 0 - player.width) {
+            player.x = width
+        }
+    }
+    player.draw()
 }
 //提示
 function hint() {
     $('#hint').show()
-    setTimeout(function() {
+    setTimeout(function () {
         $('#hint').hide()
     }, 1000)
 }
@@ -316,7 +423,7 @@ function update() {
     playerJump()
 }
 // 更新 
-menuLoop = function() {
+menuLoop = function () {
     update()
     requestAnimFrame(menuLoop)
 }
@@ -331,13 +438,17 @@ function get_hfs() {
 
 function throttle(method, context) {
     clearTimeout(method.timer)
-    method.timer = setTimeout(function() { method.call(context) }, 100)
+    method.timer = setTimeout(function () {
+        method.call(context)
+    }, 100)
 }
-window.onresize = function() { throttle(get_hfs) }
+window.onresize = function () {
+    throttle(get_hfs)
+}
 get_hfs()
 
 //开始绑定
-$('.start_pop').on('click', function() {
+$('.start_pop').on('click', function () {
 
     $('.start_pop').hide()
     if (restart == 0) {
@@ -349,7 +460,7 @@ $('.start_pop').on('click', function() {
 
 })
 //音乐
-$('.music_btn').on('click', function(e) {
+$('.music_btn').on('click', function (e) {
     if ($('.music_btn').hasClass('music_btn_type1')) {
         music1.pause();
         $('.music_btn').css("animation", 'spin 1s linear');
@@ -365,5 +476,5 @@ $('.music_btn').on('click', function(e) {
 
 //抽奖
 function get_award() {
-    history.back();
+
 }
