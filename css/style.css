@@ -180,6 +180,7 @@ h3 a {
     0% {
         transform: rotate(360deg);
     }
+
     100% {
         transform: rotate(0deg);
     }
@@ -213,11 +214,13 @@ h3 a {
     position: fixed;
     left: 10px;
     top: 100px;
-    .test1,
-    .test2,
-    .test3 {
-        font-size: 12px;
-    }
+
+}
+
+.test1,
+.test2,
+.test3 {
+    font-size: 12px;
 }
 
 #hint {
