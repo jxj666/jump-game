@@ -25,6 +25,7 @@ var platforms = [],
     firstRun = true,
     restart = 0
 //浏览器流畅动画 api
+//setTimeout和setInterval不同，requestAnimationFrame不需要设置时间间隔。这有什么好处呢？为什么requestAnimationFrame被称为神器呢？
 window.requestAnimFrame = (function () {
     return window.requestAnimationFrame || window.webkitRequestAnimationFrame || window.mozRequestAnimationFrame || window.oRequestAnimationFrame || window.msRequestAnimationFrame || function (callback) {
         window.setTimeout(callback, 1000 / 60)
@@ -53,7 +54,6 @@ var Player = function () {
     this.vy = 11
     this.vx = 0
     this.isMoving = 0
-
     this.isDead = false
     this.width = 180
     this.height = 310
@@ -180,11 +180,9 @@ function init() {
     document.onkeydown = function (e) {
         var key = e.keyCode
         if (key == 37) {
-
             player.isMoving = -9
         } else {
             if (key == 39) {
-
                 player.isMoving = 9
             }
         }
@@ -196,6 +194,7 @@ function init() {
             }
         }
     }
+    
     document.onkeyup = function (e) {
         var key = e.keyCode
         if (key == 37) {
@@ -449,7 +448,6 @@ get_hfs()
 
 //开始绑定
 $('.start_pop').on('click', function () {
-
     $('.start_pop').hide()
     if (restart == 0) {
         init()
@@ -457,7 +455,6 @@ $('.start_pop').on('click', function () {
     } else {
         reset()
     }
-
 })
 //音乐
 $('.music_btn').on('click', function (e) {
@@ -474,7 +471,7 @@ $('.music_btn').on('click', function (e) {
     }
 })
 
-//抽奖
-function get_award() {
 
+function get_award() {
+    location.reload()
 }

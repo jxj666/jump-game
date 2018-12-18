@@ -22,7 +22,7 @@ canvas {
     height: 100%;
     width: 100%;
     display: block;
-    background: url(./img/gamebg.jpg) top left;
+    background: url(../img/gamebg.jpg) top left;
     background-size: 100% 100%;
 }
 
@@ -95,7 +95,7 @@ h3 a {
 .button {
     width: 210px;
     height: 62px;
-    background: url(./img/cloud.png) 0 0 no-repeat;
+    background: url(../img/cloud.png) 0 0 no-repeat;
     background-size: contain;
     display: block;
     color: #CC0700;
@@ -129,7 +129,7 @@ h3 a {
 .info .key {
     width: 16px;
     height: 16px;
-    background: url(./img/2WEhF.png) no-repeat;
+    background: url(../img/2WEhF.png) no-repeat;
     text-indent: -9999px;
     display: inline-block;
 }
@@ -149,7 +149,7 @@ h3 a {
     right: 0;
     bottom: 0;
     z-index: 10;
-    background: rgba(0, 0, 0, 0.5) url(./img/download-1.png) no-repeat center center;
+    background: rgba(0, 0, 0, 0.5) url(../img/download-1.png) no-repeat center center;
     background-size: 80%;
 }
 
@@ -167,12 +167,12 @@ h3 a {
 }
 
 .music_btn_type1 {
-    background: url(./img/music1.png) no-repeat center center;
+    background: url(../img/music1.png) no-repeat center center;
     background-size: contain;
 }
 
 .music_btn_type2 {
-    background: url(./img/music2.png) no-repeat center center;
+    background: url(../img/music2.png) no-repeat center center;
     background-size: contain;
 }
 
