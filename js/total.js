@@ -85,11 +85,9 @@ function Player() {
         } else {
 
         }
-        if (score > 1000) {
-            this.vy = -18 - parseInt(String(score).slice(0, -3)) * 2
-        } else {
-            this.vy = -18
-        }
+
+        this.vy = -18
+
     }
 }
 player = new Player()
@@ -113,9 +111,9 @@ function Platform() {
 
         }
     }
-    if (score > 5000) {
+    if (score > 3000) {
         this.types = [1, 2, 3]
-    } else if (score > 2500) {
+    } else if (score > 1000) {
         this.types = [1, 2]
     } else {
         this.types = [1]
@@ -208,23 +206,31 @@ function init() {
                 player.vx = -20
             }
         }
+
+        //跟地板关系
         if ((player.y + player.height) > base.y && base.y < height) {
             player.jump()
         }
+        // 分数低保命
         if (score < 200 && player.y > 850) {
             player.jump()
             hint()
         }
-        if (base.y > height && (player.y + player.height) > height && player.isDead != "lol") {
+
+        //结束判定
+        if (base.y > height && (player.y + player.height) > height && player.isDead != 'playing') {
             player.isDead = true
         }
+
+        //角色运动(区间控制)
         if (player.x > width) {
             player.x = 0 - player.width
+        } else if (player.x < 0 - player.width) {
+            player.x = width
         } else {
-            if (player.x < 0 - player.width) {
-                player.x = width
-            }
         }
+
+        //上下变化
         if (player.y >= (height / 2) - (player.height / 2)) {
             player.y += player.vy
             player.vy += gravity
@@ -246,7 +252,15 @@ function init() {
             }
             score++
         }
-        collides()
+
+        //接触平台跳跃
+        platforms.forEach(function (p, i) {
+            if (player.vy > 0 && p.state === 0 && (player.x + 60 < p.x + p.width) && (player.x + player.width - 60 > p.x) && (player.y + player.height > p.y) && (player.y + player.height < p.y + p.height)) {
+                player.jump()
+            }
+        })
+
+        //判定结束
         if (player.isDead === true) {
             gameOver()
         }
@@ -274,37 +288,30 @@ function init() {
         })
     }
 
-    function collides() {
-        platforms.forEach(function (p, i) {
-            if (player.vy > 0 && p.state === 0 && (player.x + 60 < p.x + p.width) && (player.x + player.width - 60 > p.x) && (player.y + player.height > p.y) && (player.y + player.height < p.y + p.height)) {
-                player.jump()
-            }
-        })
-    }
 
+    // 更新分数
     function updateScore() {
         var scoreText = document.getElementById("score")
         scoreText.innerHTML = String(score)
     }
 
+    //游戏结束
     function gameOver() {
         platforms.forEach(function (p, i) {
-            p.y -= 12
+            p.y = -50
         })
         if (player.y > height / 2 && flag === 0) {
             player.y -= 8
             player.vy = 0
-        } else {
-            if (player.y < height / 2) {
-                flag = 1
-            } else {
-                if (player.y + player.height > height) {
-                    showGoMenu()
-                    hideScore()
-                    player.isDead = "lol"
-                }
-            }
-        }
+        } else if (player.y < height / 2) {
+            flag = 1
+        } else if (player.y + player.height > height) {
+            showGoMenu()
+            hideScore()
+            player.isDead = 'playing'
+        } else { }
+
+
     }
 
     function update() {
@@ -326,6 +333,18 @@ function init() {
     hideMenu()
     showScore()
 }
+
+
+
+
+
+
+
+
+
+
+
+
 //重置
 function reset() {
     hideGoMenu()
