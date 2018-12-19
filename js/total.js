@@ -101,15 +101,10 @@ function Platform() {
     this.cheight = 60
     this.draw = function () {
         try {
-            if (this.type == 1) {
-                this.cy = 0
-            } else {
-                if (this.type == 2) {
-                    this.cy = 0
-                }
-            }
             ctx.drawImage(cloud1, this.cx, this.cy, this.cwidth, this.cheight, this.x, this.y, this.width, this.height)
-        } catch (e) {}
+        } catch (e) {
+
+        }
     }
     if (score >= 5000) {
         this.types = [2, 2, 2, 2, 2]
