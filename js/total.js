@@ -247,6 +247,8 @@ function init() {
     }
 
 
+    //平台运动
+
     function platformCalc() {
         platforms.forEach(function (p, i) {
             if (p.type == 2) {
@@ -256,7 +258,7 @@ function init() {
                 p.x += p.vx
             }else if(p.type == 3){
                 if (p.x < 0 || p.x + p.width > width) {
-                    p.vx *= -2
+                    p.vx *= -1.1
                 }
                 p.x += p.vx
             }else{
@@ -276,7 +278,7 @@ function init() {
 
     function updateScore() {
         var scoreText = document.getElementById("score")
-        scoreText.innerHTML = String(score).slice(0, -1)
+        scoreText.innerHTML = String(score)
     }
 
     function gameOver() {
@@ -347,7 +349,7 @@ function showGoMenu() {
         menu.style.zIndex = 1
         menu.style.visibility = "visible"
         var scoreText = document.getElementById("go_score")
-        scoreText.innerHTML = "你的得分" + String(score).slice(0, -1)
+        scoreText.innerHTML = "你的得分" + String(score)
         sessionStorage.score = score
         sessionStorage.gamed = true
     }
