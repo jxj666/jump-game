@@ -8,6 +8,8 @@ canvas.height = height
 
 //设置游戏参数
 var platforms = [],
+
+    //    贴图
     z1 = document.getElementById("z1"),
     z2 = document.getElementById("z2"),
     cloud1 = document.getElementById("cloud1"),
@@ -15,11 +17,14 @@ var platforms = [],
     music1 = document.getElementById("music1"),
     music2 = document.getElementById("music2"),
     video1 = document.getElementById("video1"),
-    player, platformCount = 3,
+    player = undefined,
+    platformCount = 3,
     position = 0,
     gravity = 0.3,
-    animloop, flag = 0,
-    menuloop, broken = 0,
+    animloop = undefined,
+    flag = 0,
+    menuloop = undefined,
+    broken = 0,
     cloud_v = 1,
     score = 0,
     i = 0,
@@ -33,7 +38,7 @@ window.requestAnimFrame = (function () {
     }
 })()
 //地板对象
-var Base = function () {
+function Base() {
     this.height = 5
     this.width = width
     this.cx = 0
@@ -46,12 +51,13 @@ var Base = function () {
     this.draw = function () {
         try {
             ctx.drawImage(base1, this.cx, this.cy, this.cwidth, this.cheight, this.x, this.y, this.width, this.height)
-        } catch (e) {}
+        } catch (e) { }
     }
 }
 var base = new Base()
+
 //人物对象
-var Player = function () {
+function Player() {
     this.vy = 11
     this.vx = 0
     this.isMoving = 0
@@ -71,7 +77,7 @@ var Player = function () {
             } else {
                 ctx.drawImage(z1, this.cx, this.cy, this.cwidth, this.cheight, this.x, this.y, this.width, this.height)
             }
-        } catch (e) {}
+        } catch (e) { }
     }
     this.jump = function () {
         if ($('.music_btn').hasClass('music_btn_type1')) {
@@ -108,10 +114,10 @@ function Platform() {
         }
     }
     if (score > 5000) {
-        this.types = [1,2,3]
-    } else if(score > 2500){
-        this.types = [1,2]
-    }else{
+        this.types = [1, 2, 3]
+    } else if (score > 2500) {
+        this.types = [1, 2]
+    } else {
         this.types = [1]
     }
     this.type = this.types[Math.floor(Math.random() * this.types.length)]
@@ -176,7 +182,7 @@ function init() {
             }
         }
     }
-    
+
     document.onkeyup = function (e) {
         var key = e.keyCode
         if (key == 37) {
@@ -256,12 +262,12 @@ function init() {
                     p.vx *= -1
                 }
                 p.x += p.vx
-            }else if(p.type == 3){
+            } else if (p.type == 3) {
                 if (p.x < 0 || p.x + p.width > width) {
                     p.vx *= -1.1
                 }
                 p.x += p.vx
-            }else{
+            } else {
 
             }
             p.draw()
@@ -370,7 +376,7 @@ function hideScore() {
     var menu = document.getElementById("scoreBoard")
     menu.style.zIndex = -1
 }
-//人物跳跃
+//跳跃计算
 function playerJump() {
     player.y += player.vy
     player.vy += gravity
