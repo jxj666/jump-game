@@ -5,6 +5,7 @@ var width = 750,
     height = 1200
 canvas.width = width
 canvas.height = height
+
 //设置游戏参数
 var platforms = [],
     z1 = document.getElementById("z1"),
@@ -106,26 +107,12 @@ function Platform() {
 
         }
     }
-    if (score >= 5000) {
-        this.types = [2, 2, 2, 2, 2]
-    } else {
-        if (score >= 2000 && score < 5000) {
-            this.types = [1, 1, 2, 2, 2]
-        } else {
-            if (score >= 1000 && score < 2000) {
-                this.types = [1, 1, 2, 2, 2]
-            } else {
-                if (score >= 500 && score < 1000) {
-                    this.types = [1, 1, 1, 1, 2]
-                } else {
-                    if (score >= 100 && score < 500) {
-                        this.types = [1, 1, 1, 1, 1]
-                    } else {
-                        this.types = [1]
-                    }
-                }
-            }
-        }
+    if (score > 5000) {
+        this.types = [1,2,3]
+    } else if(score > 2500){
+        this.types = [1,2]
+    }else{
+        this.types = [1]
     }
     this.type = this.types[Math.floor(Math.random() * this.types.length)]
     this.moved = 0
@@ -205,9 +192,9 @@ function init() {
 
     function playerCalc() {
 
+        //主角动作
         player.x += player.vx
         player.vx = player.isMoving
-        //横向速度限定
         if (player.vx > 20) {
             player.vx = 20
         } else {
@@ -215,20 +202,16 @@ function init() {
                 player.vx = -20
             }
         }
-
         if ((player.y + player.height) > base.y && base.y < height) {
             player.jump()
         }
-
         if (score < 200 && player.y > 850) {
             player.jump()
             hint()
         }
-
         if (base.y > height && (player.y + player.height) > height && player.isDead != "lol") {
             player.isDead = true
         }
-
         if (player.x > width) {
             player.x = 0 - player.width
         } else {
@@ -236,7 +219,6 @@ function init() {
                 player.x = width
             }
         }
-
         if (player.y >= (height / 2) - (player.height / 2)) {
             player.y += player.vy
             player.vy += gravity
@@ -272,6 +254,13 @@ function init() {
                     p.vx *= -1
                 }
                 p.x += p.vx
+            }else if(p.type == 3){
+                if (p.x < 0 || p.x + p.width > width) {
+                    p.vx *= -2
+                }
+                p.x += p.vx
+            }else{
+
             }
             p.draw()
         })
@@ -386,8 +375,6 @@ function playerJump() {
     if (player.vy > 0 && (player.x + 15 < 260) && (player.x + player.width - 15 > 155) && (player.y + player.height > 475) && (player.y + player.height < 500)) {
         player.jump()
     }
-
-
     player.x += player.vx
     player.vx = player.isMoving
 
@@ -404,6 +391,7 @@ function playerJump() {
     }
     player.draw()
 }
+
 //提示
 function hint() {
     $('#hint').show()
@@ -429,7 +417,6 @@ function get_hfs() {
     $("#canvas").css("height", $(window).height())
     $("#canvas").css("width", $(window).width())
 }
-
 function throttle(method, context) {
     clearTimeout(method.timer)
     method.timer = setTimeout(function () {
@@ -466,7 +453,7 @@ $('.music_btn').on('click', function (e) {
     }
 })
 
-
+//跳转预备
 function get_award() {
     location.reload()
 }
