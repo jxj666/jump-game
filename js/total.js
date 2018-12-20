@@ -18,6 +18,9 @@ var platforms = [],
     music2 = document.getElementById("music2"),
     video1 = document.getElementById("video1"),
     player = undefined,
+
+
+
     platformCount = 3,
     position = 0,
     gravity = 0.3,
@@ -91,6 +94,8 @@ function Player() {
     }
 }
 player = new Player()
+
+
 //跳台对象
 function Platform() {
     this.width = 220
@@ -128,6 +133,7 @@ function Platform() {
 for (var i = 0; i < platformCount; i++) {
     platforms.push(new Platform())
 }
+
 //初始化
 function init() {
     var jumpCount = 0
@@ -137,9 +143,7 @@ function init() {
     $('.music_btn').css("animation", 'spin 2s infinite linear');
     $('.img_box img').attr('src', sessionStorage.user_avatar);
 
-    function paintCanvas() {
-        ctx.clearRect(0, 0, width, height)
-    }
+ 
     if (window.DeviceOrientationEvent) {
         window.addEventListener("deviceorientation", DeviceOrientationHandler, false)
     } else {
@@ -194,6 +198,8 @@ function init() {
         }
     }
 
+
+    //主角数学关系
     function playerCalc() {
 
         //主角动作
@@ -264,11 +270,12 @@ function init() {
         if (player.isDead === true) {
             gameOver()
         }
+        player.draw()
+
     }
 
 
-    //平台运动
-
+    //平台数学关系
     function platformCalc() {
         platforms.forEach(function (p, i) {
             if (p.type == 2) {
@@ -313,13 +320,17 @@ function init() {
 
 
     }
-
+    // 更新
     function update() {
-        paintCanvas()
+        //清空画布
+        ctx.clearRect(0, 0, width, height)
+        //平台数学关系
         platformCalc()
+        //主角数学关系
         playerCalc()
-        player.draw()
+        //绘制底线
         base.draw()
+        //更新分数
         updateScore()
     }
     menuLoop = function () {
