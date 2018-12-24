@@ -295,6 +295,16 @@ function init() {
         })
     }
 
+    // 底线数学关系
+    function baseCalc(){
+                if (score < 200 ) {
+                    base.draw()
+
+                }else{
+
+                }
+    }
+
 
     // 更新分数
     function updateScore() {
@@ -316,9 +326,9 @@ function init() {
             showGoMenu()
             hideScore()
             player.isDead = 'playing'
-        } else { }
+        } else {
 
-
+        }
     }
     // 更新
     function update() {
@@ -328,8 +338,8 @@ function init() {
         platformCalc()
         //主角数学关系
         playerCalc()
-        //绘制底线
-        base.draw()
+        //底线数学关系
+        baseCalc()
         //更新分数
         updateScore()
     }
