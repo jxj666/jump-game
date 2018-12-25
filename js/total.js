@@ -1,15 +1,15 @@
 // 设置画布
-var canvas = document.getElementById("canvas"),
-    ctx = canvas.getContext("2d")
-var width = 750,
-    height = 1200
+var canvas = document.getElementById("canvas")
+var ctx = canvas.getContext("2d")
+var width = 750
+var height = 1200
 canvas.width = width
 canvas.height = height
 
-//设置游戏参数
-var platforms = [],
 
-    //    贴图
+
+//    贴图
+var platforms = [],
     z1 = document.getElementById("z1"),
     z2 = document.getElementById("z2"),
     cloud1 = document.getElementById("cloud1"),
@@ -19,8 +19,7 @@ var platforms = [],
     video1 = document.getElementById("video1"),
     player = undefined,
 
-
-
+    //主要参数
     platformCount = 3,
     position = 0,
     gravity = 0.3,
@@ -33,21 +32,22 @@ var platforms = [],
     i = 0,
     firstRun = true,
     restart = 0
-//浏览器流畅动画 api
-//setTimeout和setInterval不同，requestAnimationFrame不需要设置时间间隔。这有什么好处呢？为什么requestAnimationFrame被称为神器呢？
+//requestAnimFrame定时刷新,与setTimeout和setInterval不同，requestAnimationFrame不需要设置时间间隔。这有什么好处呢？为什么requestAnimationFrame被称为神器呢？
 window.requestAnimFrame = (function () {
     return window.requestAnimationFrame || window.webkitRequestAnimationFrame || window.mozRequestAnimationFrame || window.oRequestAnimationFrame || window.msRequestAnimationFrame || function (callback) {
         window.setTimeout(callback, 1000 / 60)
     }
 })()
+
+
 //地板对象
 function Base() {
-    this.height = 5
+    this.height = 20
     this.width = width
     this.cx = 0
     this.cy = 0
     this.cwidth = 40
-    this.cheight = 5
+    this.cheight = 20
     this.moved = 0
     this.x = 0
     this.y = height - this.height
@@ -94,8 +94,6 @@ function Player() {
     }
 }
 player = new Player()
-
-
 //跳台对象
 function Platform() {
     this.width = 220
@@ -134,6 +132,8 @@ for (var i = 0; i < platformCount; i++) {
     platforms.push(new Platform())
 }
 
+
+
 //初始化
 function init() {
     var jumpCount = 0
@@ -143,7 +143,7 @@ function init() {
     $('.music_btn').css("animation", 'spin 2s infinite linear');
     $('.img_box img').attr('src', sessionStorage.user_avatar);
 
- 
+
     if (window.DeviceOrientationEvent) {
         window.addEventListener("deviceorientation", DeviceOrientationHandler, false)
     } else {
@@ -197,12 +197,10 @@ function init() {
             }
         }
     }
+    //主角动作
 
-
-    //主角数学关系
     function playerCalc() {
 
-        //主角动作
         player.x += player.vx
         player.vx = player.isMoving
         if (player.vx > 20) {
@@ -270,12 +268,11 @@ function init() {
         if (player.isDead === true) {
             gameOver()
         }
-        player.draw()
-
     }
 
 
-    //平台数学关系
+    //平台运动
+
     function platformCalc() {
         platforms.forEach(function (p, i) {
             if (p.type == 2) {
@@ -293,16 +290,6 @@ function init() {
             }
             p.draw()
         })
-    }
-
-    // 底线数学关系
-    function baseCalc(){
-                if (score < 200 ) {
-                    base.draw()
-
-                }else{
-
-                }
     }
 
 
@@ -326,21 +313,17 @@ function init() {
             showGoMenu()
             hideScore()
             player.isDead = 'playing'
-        } else {
+        } else { }
 
-        }
+
     }
-    // 更新
+
     function update() {
-        //清空画布
         ctx.clearRect(0, 0, width, height)
-        //平台数学关系
         platformCalc()
-        //主角数学关系
         playerCalc()
-        //底线数学关系
-        baseCalc()
-        //更新分数
+        player.draw()
+        base.draw()
         updateScore()
     }
     menuLoop = function () {
@@ -381,6 +364,38 @@ function reset() {
         platforms.push(new Platform())
     }
 }
+
+
+//跳跃计算
+function playerJump() {
+    player.y += player.vy
+    player.vy += gravity
+    if (player.vy > 0 && (player.x + 15 < 260) && (player.x + player.width - 15 > 155) && (player.y + player.height > 475) && (player.y + player.height < 500)) {
+        player.jump()
+    }
+    player.x += player.vx
+    player.vx = player.isMoving
+
+
+    if ((player.y + player.height) > base.y && base.y < height) {
+        player.jump()
+    }
+    if (player.x > width) {
+        player.x = 0 - player.width
+    } else {
+        if (player.x < 0 - player.width) {
+            player.x = width
+        }
+    }
+    player.draw()
+}
+
+
+
+
+
+
+
 //隐藏主菜单
 function hideMenu() {
     var menu = document.getElementById("mainMenu")
@@ -416,29 +431,18 @@ function hideScore() {
     var menu = document.getElementById("scoreBoard")
     menu.style.zIndex = -1
 }
-//跳跃计算
-function playerJump() {
-    player.y += player.vy
-    player.vy += gravity
-    if (player.vy > 0 && (player.x + 15 < 260) && (player.x + player.width - 15 > 155) && (player.y + player.height > 475) && (player.y + player.height < 500)) {
-        player.jump()
-    }
-    player.x += player.vx
-    player.vx = player.isMoving
 
 
-    if ((player.y + player.height) > base.y && base.y < height) {
-        player.jump()
-    }
-    if (player.x > width) {
-        player.x = 0 - player.width
-    } else {
-        if (player.x < 0 - player.width) {
-            player.x = width
-        }
-    }
-    player.draw()
-}
+
+
+
+
+
+
+
+
+
+
 
 //提示
 function hint() {

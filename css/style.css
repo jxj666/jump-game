@@ -22,7 +22,7 @@ canvas {
     height: 100%;
     width: 100%;
     display: block;
-    background: url(../img/gamebg.jpg) top left;
+    background: url(../img/gamebg.png) top left;
     background-size: 100% 100%;
 }
 
