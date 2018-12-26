@@ -106,7 +106,7 @@ ctx.stroke(path);
 
 toDataUrl
 
-##### [利用canvas缩略图片:](http://jxjweb.top/2017/03/27.htm)
+##### [利用canvas缩略图片:](http://jxjweb.top/2017/03/27.html)
 
 ### 实例(小游戏)
 
