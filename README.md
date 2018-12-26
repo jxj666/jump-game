@@ -9,7 +9,7 @@ animation
 ```
 ### animation 实例
 
-[外链跳转](https://api-m.haohuan.com/public/h5/externalChainSkip.html?url=https%3A%2F%2Fwww.haohuan.com%3Ftest%3D1)
+##### [外链跳转](https://api-m.haohuan.com/public/h5/externalChainSkip.html?url=https%3A%2F%2Fwww.haohuan.com%3Ftest%3D1)
 
 ### 更强大的绘图技术
 
@@ -23,9 +23,9 @@ Canvas是HTML5新增的组件，它就像一块幕布，可以用JavaScript在�
 
 一个Canvas定义了一个指定尺寸的矩形框(画布)，在这个范围内我们可以随意绘制
 
-[圣诞活动](http://api-m.haohuan.com/public/activity/ChristmasDay.html)
+##### [圣诞活动](http://api-m.haohuan.com/public/activity/ChristmasDay.html)
 
-[精彩介绍](https://www.imooc.com/video/2493)
+##### [精彩介绍](https://www.imooc.com/video/2493)
 
 ### canvas 特点
 
@@ -106,7 +106,7 @@ ctx.stroke(path);
 
 toDataUrl
 
-[利用canvas缩略图片:](http://jxjweb.top/2017/03/27.htm)
+##### [利用canvas缩略图片:](http://jxjweb.top/2017/03/27.htm)
 
 ### 实例(小游戏)
 
@@ -116,7 +116,13 @@ toDataUrl
 
 清空画布
 
-[小游戏](http://jxjweb.gz01.bdysite.com/canvas/jump/play.html)
+##### [小游戏](http://jxjweb.gz01.bdysite.com/canvas/jump/play.html)
+
+### 技术展示
+
+##### [codepen](https://codepen.io/)
+
+##### [echarts](http://echarts.baidu.com/index.html)
 
 ### 肖健
 ### 2018/12/23
