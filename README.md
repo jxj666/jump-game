@@ -1,2 +1,1 @@
-HTML5涂鸦跳跃 这是最初为Android和iOS设备提供的Doodle Jump的娱乐活动。
-
+# 前端动效技术
