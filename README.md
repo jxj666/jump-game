@@ -59,7 +59,7 @@ html5图形标签
 ## Canvas 坐标系
 
 我们可以在Canvas上绘制各种形状。在绘制前，我们需要先了解一下Canvas的坐标系统：
-          
+
 Canvas的坐标以左上角为原点，水平向右为X轴，垂直向下为Y轴，以像素为单位，所以每个点都是非负整数
 
 ## 常用api
@@ -107,6 +107,8 @@ ctx.stroke(path);
 toDataUrl
 
 ##### [利用canvas缩略图片:](http://jxjweb.top/2017/03/27.html)
+
+
 
 ## 实例(小游戏)
 
