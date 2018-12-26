@@ -104,7 +104,7 @@ ctx.stroke(path);
 
 画布保存
 
--. toDataUrl
+- toDataUrl
 
 ##### => [利用canvas缩略图片:](http://jxjweb.top/2017/03/27.html)
 
@@ -114,9 +114,9 @@ ctx.stroke(path);
 
 动画原理:
 
--. 绘制画布
+- 绘制画布
 
--. 清空画布
+- 清空画布
 
 ##### => [小游戏](https://jxj322991.github.io/jump-game/play.html)
 
