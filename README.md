@@ -116,7 +116,7 @@ toDataUrl
 
 清空画布
 
-##### [小游戏](http://jxjweb.gz01.bdysite.com/canvas/jump/play.html)
+##### [小游戏](https://jxj322991.github.io/jump-game/play.html)
 
 ### 技术展示
 
