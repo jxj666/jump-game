@@ -31,19 +31,19 @@ Canvas是HTML5新增的组件，它就像一块幕布，可以用JavaScript在�
 
 ##### 特点
 
-html5图形标签
+1. html5图形标签
 
-只是容器,相当于提供了一个画布
+1. 只是容器,相当于提供了一个画布
 
-需要脚本来绘制图形
+1. 需要脚本来绘制图形
 
-依赖 api
+1. 依赖 api
 
 ##### 与 SVG 区别
 
- canvas 依赖 api 绘图
+1. canvas 依赖 api 绘图
 
- svg 依赖 xml 文档描述绘图
+1. svg 依赖 xml 文档描述绘图
 
 ## 画布
 
@@ -104,7 +104,7 @@ ctx.stroke(path);
 
 画布保存
 
-toDataUrl
+-. toDataUrl
 
 ##### [利用canvas缩略图片:](http://jxjweb.top/2017/03/27.html)
 
@@ -114,9 +114,9 @@ toDataUrl
 
 动画原理:
 
-绘制画布
+-. 绘制画布
 
-清空画布
+-. 清空画布
 
 ##### [小游戏](https://jxj322991.github.io/jump-game/play.html)
 
