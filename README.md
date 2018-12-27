@@ -185,6 +185,7 @@ toDataUrl()
 
 ##### => [利用canvas缩略图片:](http://jxjweb.top/2017/03/27.html)
 
+=> [模拟器](http://js.jirengu.com/?html,output)
 
 
 ## 实例(小游戏)
