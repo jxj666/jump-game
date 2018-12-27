@@ -3,11 +3,47 @@
 ## css3动效技术:
 
 ```
-transform
-transition
-animation
+1. transform 转换
+
+translate(x,y)	
+scale(x,y)	
+rotate(angle)	
+skew(x-angle,y-angle)	
+
+2. transition 过渡
+
+transition: property duration timing-function delay;
+
+3. animation 动画
+
+animation: name duration timing-function delay iteration-count(n/infinite) direction(alternate);
+
+@keyframes name
+{
+from {}
+to {}
+}
+
+@keyframes name
+{
+0% {}
+100% {}
+}
+
 ```
-## animation 实例
+
+=> [translate](http://www.w3school.com.cn/tiy/c.asp?f=css_transform_translate)
+=> [scale](http://www.w3school.com.cn/tiy/c.asp?f=css_transform_scale)
+=> [rotate](http://www.w3school.com.cn/tiy/c.asp?f=css_transform_rotate)
+
+=> [transition](http://www.w3school.com.cn/tiy/t.asp?f=css3_transition)
+
+=> [animation](http://www.w3school.com.cn/tiy/t.asp?f=css3_animation)
+
+
+##  实例
+
+![外链跳转](png/01.png)
 
 ##### => [外链跳转](https://api-m.haohuan.com/public/h5/externalChainSkip.html?url=https%3A%2F%2Fwww.haohuan.com%3Ftest%3D1)
 
