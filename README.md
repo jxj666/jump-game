@@ -91,13 +91,11 @@ Canvas是HTML5新增的组件，它就像一块画布，可以用JavaScript在�
 ## 画布
 
 一个Canvas定义了一个指定尺寸的画布，在这个范围内我们可以随意绘制：
-```
-<canvas id="test-canvas" width="300" height="200"></canvas> 
-```
+
 由于浏览器对HTML5标准支持不一致，所以，通常在canvas内部添加一些说明性HTML代码，如果浏览器支持Canvas，它将忽略canvas内部的HTML，如果浏览器不支持Canvas，它将显示canvas内部的HTML：
 
 ```
-<canvas id=“test-stock” width=“300” height=“200”> <p>不支持</p> </canvas> 
+<canvas id='test' width='200' height='200' style='background:#fff'> <p>不支持 canvas</p> </canvas> 
 ```
 ## Canvas 坐标系
 
@@ -105,19 +103,30 @@ Canvas是HTML5新增的组件，它就像一块画布，可以用JavaScript在�
 
 Canvas的坐标以左上角为原点，水平向右为X轴，垂直向下为Y轴，以像素为单位，所以每个点都是非负整数
 
-![坐标系](png/01/png)
+![坐标系](png/01.png)
 
 
 ## 常用api
 
 ```
-getContent
-clearRect
-srtoke
-fill
-drawImage
+getContext 获取画笔
+```
 ```
 
+stroke()
+fill()
+
+
+arc(x,y,r,start,stop)
+
+rect()	
+fillRect(x, y, width, height)	
+strokeRect(x, y, width, height)	
+clearRect(x, y, width, height)
+
+beginPath()
+
+```
 
 
 
@@ -125,32 +134,54 @@ drawImage
 ## 绘图实例
 
 ```
+var canvas = document.getElementById('test')
+var ctx = canvas.getContext('2d'); 
 
-var canvas = document.getElementById('test-shape-canvas'), ctx = canvas.getContext('2d'); 
+ctx.clearRect(0, 0, 200, 200);
+ctx.fillStyle = '#dddddd'; 
+ctx.fillRect(10, 10, 130, 130); 
 
-ctx.clearRect(0, 0, 200, 200); // 擦除(0,0)位置大小为200x200的矩形，擦除的意思是把该区域变为透明
-ctx.fillStyle = '#dddddd'; // 设置颜色
-ctx.fillRect(10, 10, 130, 130); // 把(10,10)位置大小为130x130的矩形涂色
-// 利用Path绘制复杂路径:
-var path=new Path2D();
-path.arc(75, 75, 50, 0, Math.PI*2, true);
-path.moveTo(110,75);
-path.arc(75, 75, 35, 0, Math.PI, false);
-path.moveTo(65, 65);
-path.arc(60, 65, 5, 0, Math.PI*2, true);
-path.moveTo(95, 65);
-path.arc(90, 65, 5, 0, Math.PI*2, true);
-ctx.strokeStyle = '#0000ff';
-ctx.stroke(path);
+
+
+
+ctx.strokeStyle = "rgba(0, 0, 200, 0.5)";
+ctx.strokeRect (30, 30, 90, 90);
+
+
+ctx.arc(75, 75, 35, 0, 3.14, false);
+ctx.moveTo(65, 65);
+ctx.arc(60, 65, 5, 0, Math.PI*2, true);
+ctx.moveTo(95, 65);
+ctx.arc(90, 65, 5, 0, Math.PI*2, false);
+ctx.strokeStyle = 'red';
+ctx.stroke();
+
+ctx.beginPath();
+ctx.moveTo(75,50);
+ctx.lineTo(100,25);
+ctx.lineTo(50,25);
+ctx.fillStyle = 'blue';
+ctx.fill();
+
+ctx.font="10px";
+ctx.fillText("Hello World",50,160);
 
 
 ```
 
+=> [模拟器](http://js.jirengu.com/?html,output)
+
+
 ## 实例(缩略图生成)
 
 画布保存
+```
+context.drawImage(img,sx,sy,swidth,sheight,x,y,width,height);
 
-- toDataUrl
+toDataUrl()
+```
+
+[02](png/02.png)
 
 ##### => [利用canvas缩略图片:](http://jxjweb.top/2017/03/27.html)
 
