@@ -183,10 +183,9 @@ toDataUrl()
 
 [02](png/02.png)
 
-##### => [利用canvas缩略图片:](http://jxjweb.top/2017/03/27.html)
-
 => [模拟器](http://js.jirengu.com/?html,output)
 
+##### => [利用canvas缩略图片:](http://jxjweb.top/2017/03/27.html)
 
 ## 实例(小游戏)
 
@@ -196,7 +195,8 @@ toDataUrl()
 
 - 清空画布
 
-##### => [小游戏](https://jxj322991.github.io/jump-game/play.html)
+##### => [小游戏](http://jxjweb.gz01.bdysite.com/canvas/jump/play.html
+)
 
 ## 技术展示
 
