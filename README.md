@@ -43,21 +43,26 @@ to {}
 
 ##  实例
 
-![外链跳转](png/01.png)
 
 ##### => [外链跳转](https://api-m.haohuan.com/public/h5/externalChainSkip.html?url=https%3A%2F%2Fwww.haohuan.com%3Ftest%3D1)
 
+
+
 ## 更强大的绘图技术
 
-ECharts 支持以 Canvas、SVG（4.0+）、VML 的形式渲染图表。VML 可以兼容低版本 IE，SVG 使得移动端不再为内存担忧，Canvas 可以轻松应对大数据量和特效的展现。不同的渲染方式提供了更多选择，使得 ECharts 在各种场景下都有更好的表现。
+### svg / canvas
+
+VML 可以兼容低版本 IE，SVG 使得移动端不再为内存担忧，Canvas 可以轻松应对大数据量和特效的展现。
 
 ## canvas
 
-Canvas是HTML5新增的组件，它就像一块幕布，可以用JavaScript在上面绘制各种图表、动画等。
+Canvas是HTML5新增的组件，它就像一块画布，可以用JavaScript在上面绘制各种图表、动画等。
 
 没有Canvas的年代，绘图只能借助Flash插件实现，页面不得不用JavaScript和Flash进行交互。有了Canvas，我们就再也不需要Flash了，直接使用JavaScript完成绘制。
 
 一个Canvas定义了一个指定尺寸的矩形框(画布)，在这个范围内我们可以随意绘制
+
+
 
 ##### => [圣诞活动](http://api-m.haohuan.com/public/activity/ChristmasDay.html)
 
@@ -81,6 +86,8 @@ Canvas是HTML5新增的组件，它就像一块幕布，可以用JavaScript在�
 
 1. svg 依赖 xml 文档描述绘图
 
+=> [svg:canvas思维导图](canvas.svg)
+
 ## 画布
 
 一个Canvas定义了一个指定尺寸的画布，在这个范围内我们可以随意绘制：
@@ -97,6 +104,9 @@ Canvas是HTML5新增的组件，它就像一块幕布，可以用JavaScript在�
 我们可以在Canvas上绘制各种形状。在绘制前，我们需要先了解一下Canvas的坐标系统：
 
 Canvas的坐标以左上角为原点，水平向右为X轴，垂直向下为Y轴，以像素为单位，所以每个点都是非负整数
+
+![坐标系](png/01/png)
+
 
 ## 常用api
 
