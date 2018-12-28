@@ -195,14 +195,29 @@ toDataUrl()
 
 - 清空画布
 
-##### => [小游戏](http://jxjweb.gz01.bdysite.com/canvas/jump/play.html
-)
+##### => [小游戏](http://jxjweb.gz01.bdysite.com/canvas/jump/play.html)
 
 ## 技术展示
 
 ##### => [codepen](https://codepen.io/)
 
 ##### => [echarts](http://echarts.baidu.com/index.html)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 ## 肖健
 ## 2018/12/23
