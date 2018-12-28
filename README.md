@@ -138,7 +138,7 @@ moveTo()
 ## 绘图实例
 
 ```
-var canvas = document.getElementById('test')
+var canvas = document.getElementById('test');
 var ctx = canvas.getContext('2d'); 
 
 ctx.clearRect(0, 0, 200, 200);
@@ -185,7 +185,7 @@ context.drawImage(img,sx,sy,swidth,sheight,x,y,width,height);
 toDataUrl()
 ```
 
-![02](png/02.png)
+![03](png/03.png)
 
 => [模拟器](http://js.jirengu.com/?html,output)
 
