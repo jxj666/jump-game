@@ -193,11 +193,15 @@ toDataUrl()
 
 动画原理:
 
+```
+window.requestAnimationFrame 
+```
 - 绘制画布
-
 - 清空画布
 
+
 ##### => [小游戏](http://jxjweb.gz01.bdysite.com/canvas/jump/play.html)
+##### => [小程序逻辑](https://github.com/jxj322991/jump-game/blob/master/js/total.js)
 
 ## 技术展示
 
