@@ -183,7 +183,7 @@ context.drawImage(img,sx,sy,swidth,sheight,x,y,width,height);
 toDataUrl()
 ```
 
-[02](png/02.png)
+![02](png/02.png)
 
 => [模拟器](http://js.jirengu.com/?html,output)
 
