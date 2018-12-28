@@ -16,7 +16,7 @@ skew(x-angle,y-angle)
 
 2. transition 过渡
 
-transition: property duration timing-function delay;
+transition: property duration timing-function(ease/linear/cubic-bezier) delay;
 
 3. animation 动画
 
@@ -120,15 +120,15 @@ getContext 获取画笔
 stroke()
 fill()
 
-
 arc(x,y,r,start,stop)
+rect()
 
-rect()	
 fillRect(x, y, width, height)	
 strokeRect(x, y, width, height)	
 clearRect(x, y, width, height)
 
 beginPath()
+moveTo()
 
 ```
 
