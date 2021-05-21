@@ -204,7 +204,7 @@ window.requestAnimationFrame
 canvas绘制的模型可以自动调用硬件GPU加速
 
 ##### => [小游戏](http://jxjweb.gz01.bdysite.com/canvas/jump/play.html)
-##### => [小程序逻辑](https://github.com/jxj322991/jump-game/blob/master/js/total.js)
+##### => [小程序逻辑](https://github.com/jxj666/jump-game/blob/master/js/total.js)
 
 ## 技术展示
 
